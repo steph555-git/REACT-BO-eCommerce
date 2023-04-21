@@ -1,38 +1,52 @@
-.App {
+.header{
+    height: 97px;
+    width: 100%;
+    position: absolute;
+    background-color: black;
+
+  }
+.header h3{
+  color: white;
+  margin: 10px;
+  padding-left: 20px;
+  font-size: 25px;
+}
+.tab-spacing{
+  margin-right: 1px;
+}
+
+.nav-tabs .nav-link.home, .nav-tabs .nav-link.products, .nav-tabs .nav-link.customers, .nav-tabs .nav-link.orders, .nav-tabs .nav-link.articles, .nav-tabs .nav-link.statistics,  .nav-tabs .nav-link.settings, .nav-tabs .nav-link.site {
+  background-color: #4f4f4f;
+  color: white;
+  font-weight: 300;
+  width: 110px;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav-tabs .nav-link.website{
+  color:#4f4f4f
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.nav-tabs .nav-link.active.home {
+  background-color:#d8d8d8;
+  color:black;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.nav-tabs .nav-link.active.products {
+  background-color:#da8181;
 }
-
-.App-link {
-  color: #61dafb;
+.nav-tabs .nav-link.active.customers {
+  background-color: #f6b160;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav-tabs .nav-link.active.orders {
+  background-color: #cdaa70;
+}
+.nav-tabs .nav-link.active.articles {
+  background-color: #9ec3ed;
+}
+.nav-tabs .nav-link.active.statistics {
+  background-color: #c5b3ed;
+}
+.nav-tabs .nav-link.active.site {
+  background-color: #91d9af;
+}
+.nav-tabs .nav-link.active.settings {
+  background-color: #c5ceee;
 }
