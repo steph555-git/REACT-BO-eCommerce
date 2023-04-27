@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
@@ -20,18 +19,17 @@ import Site from './components/Site/Site'
 import './App.css';
 
 function App() {
-  const [tabsList, setTabsList] = useState([])
-  useEffect(() => {
-    axios.get('https://bo-ecommerce-f3e6bf.appdrag.site/api/getTabs', {
-      params: {
-        "AD_PageNbr": "1",
-        "AD_PageSize": "500"
-      }
-    })
-      .then((response) => {
-        setTabsList(response.data.Table)
-      });
-  }, [])
+
+  //const componentsMap = {
+  //  'home': Home,
+  //  'products': Products,
+  //  'customers': Customers,
+  //  'orders': Orders,
+  //  'articles': Articles,
+  //  'settings': Settings,
+  //  'statistics': Statistics,
+  //  'site': Site
+  //}
 
   return (
     <div className="header">
@@ -40,25 +38,32 @@ function App() {
         defaultActiveKey="home"
         id="uncontrolled-tab-example"
         className="m-4"
-        style={{ fontSize: '14px', lineHeight: '15px' }}
-      >
-        {console.log({ tabsList })}
-        {
+        style={{ fontSize: '14px', lineHeight: '15px' }}>
 
-          tabsList?.map((tab, i) => {
-            const Component = tab.tabName[0].toUpperCase() + tab.tabName.slice(1)
-            return (
-              <Tab
-                key={i}
-                eventKey={tab.tabName}
-                tabClassName={`${tab.tabName.toLowerCase()} tab-spacing`}
-                title={tab.tabName.toUpperCase()}
-              >
-                <Component />
-              </Tab>
-            )
-          })
-        }
+        <Tab eventKey='home' tabClassName='home tab-spacing' title='HOME'>
+          <Home />
+        </Tab>
+        <Tab eventKey='products' tabClassName='products tab-spacing' title='PRODUCTS'>
+          <Products />
+        </Tab>
+        <Tab eventKey='customers' tabClassName='customers tab-spacing' title='CUSTOMERS'>
+          <Customers />
+        </Tab>
+        <Tab eventKey='orders' tabClassName='orders tab-spacing' title='ORDERS'>
+          <Orders />
+        </Tab>
+        <Tab eventKey='articles' tabClassName='articles tab-spacing' title='ARTICLES'>
+          <Articles />
+        </Tab>
+        <Tab eventKey='statistics' tabClassName='statistics tab-spacing' title='STATISTICS'>
+          <Statistics />
+        </Tab>
+        <Tab eventKey='settings' tabClassName='settings tab-spacing' title='SETTINGS'>
+          <Settings />
+        </Tab>
+        <Tab eventKey='site' tabClassName='site tab-spacing' title='SITE'>
+          <Site />
+        </Tab>
         <Tab eventKey="website" tabClassName="website tab-spacing" title={<FontAwesomeIcon icon={faGlobe} />}>
         </Tab>
       </Tabs>

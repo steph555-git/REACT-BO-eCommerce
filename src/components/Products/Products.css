@@ -2,3 +2,15 @@
     background-color:#da8181;
     font-size: 15px;
 }
+label{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+h2{
+    color: #AAAAAA;
+    font-size: x-small;
+}
+table{
+    margin-top: -15px;
+}
