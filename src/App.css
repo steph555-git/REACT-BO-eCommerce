@@ -1,52 +1,50 @@
-.header{
-    height: 97px;
-    width: 100%;
-    position: absolute;
-    background-color: black;
 
-  }
-.header h3{
-  color: white;
-  margin: 10px;
-  padding-left: 20px;
-  font-size: 25px;
+h3{
+color: white;
+margin: 10px;
+padding-left: 20px;
 }
-.tab-spacing{
-  margin-right: 1px;
-}
-
-.nav-tabs .nav-link.home, .nav-tabs .nav-link.products, .nav-tabs .nav-link.customers, .nav-tabs .nav-link.orders, .nav-tabs .nav-link.articles, .nav-tabs .nav-link.statistics,  .nav-tabs .nav-link.settings, .nav-tabs .nav-link.site {
-  background-color: #4f4f4f;
-  color: white;
-  font-weight: 300;
+.tab-color{
+  font-size: 20px;
   width: 110px;
   text-align: center;
+  margin:1px;
+  background-color: #4f4f4f;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
-.nav-tabs .nav-link.website{
-  color:#4f4f4f
+.website{
+  margin:1px;
+  background-color: #4f4f4f;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  width: 50px;
+  text-align: center;
 }
-.nav-tabs .nav-link.active.home {
-  background-color:#d8d8d8;
-  color:black;
+.navbar-dark .navbar-nav .nav-link.active {
+  color: black; 
 }
-.nav-tabs .nav-link.active.products {
-  background-color:#da8181;
+.home.tab-color.active{
+  background-color: #d8d8d8;
 }
-.nav-tabs .nav-link.active.customers {
+.products.tab-color.active{
+  background-color: #da8181;
+}
+.tab-color.customers.active{
   background-color: #f6b160;
 }
-.nav-tabs .nav-link.active.orders {
+.tab-color.orders.active{
   background-color: #cdaa70;
 }
-.nav-tabs .nav-link.active.articles {
+.tab-color.articles.active{
   background-color: #9ec3ed;
 }
-.nav-tabs .nav-link.active.statistics {
+.tab-color.statistics.active{
   background-color: #c5b3ed;
 }
-.nav-tabs .nav-link.active.site {
+.tab-color.site.active{
   background-color: #91d9af;
 }
-.nav-tabs .nav-link.active.settings {
-  background-color: #c5ceee;
+.tab-color.settings.active{
+  background-color: #c5ceee;;
 }
