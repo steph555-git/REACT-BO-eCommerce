@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import Form from 'react-bootstrap/Form'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
-import SubNavProducts from './SubNavProducts'
 import ListProducts from './ListProducts'
 
 import './Products.css'
@@ -21,7 +21,7 @@ const Products = () => {
 
     return (
         <>
-            <Navbar className='products p-1' variant="light" expand="lg" style={{ color: 'black', position: 'absolute', top: '96px', left: 0, right: 0, boxShadow: '0px 2px 5px rgba(0,0,0,0.4)', height: '30px' }} >
+            <Navbar className='products p-1' variant="light" style={{ color: 'black', boxShadow: '0px 2px 5px rgba(0,0,0,0.4)', height: '30px' }} >
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
@@ -36,7 +36,23 @@ const Products = () => {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-            {visible && <SubNavProducts />}
+            {visible &&
+                <div className='shadow-sm mb-5 rounded' style={{ backgroundColor: '#F0F0F0', paddingTop: '15px' }}>
+                    <div className='d-flex justify-content-center pb-2' >
+                        <label>Title/Ref. : </label>
+                        <input type="text"/>
+                        <label>N° : </label>
+                        <input type="text" />
+                        <label>Marque : </label>
+                        <input type="text" />
+                        <label>Fournisseur : </label>
+                        <input type="text" />
+                        <label>Gamme : </label>
+                        <input className='me-4' type="text" /><br />
+                        <button className='btn btn-outline-success btn-sm px-3'>SEARCH</button>
+                    </div>
+                </div>}
+
             <ListProducts />
         </>
     )

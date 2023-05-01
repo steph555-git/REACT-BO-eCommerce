@@ -9,7 +9,7 @@ import './Home.css'
 
 const Home = () => {
     return (
-        <Navbar className='home p-1' variant="light" expand="lg" style={{ color: 'black', position: 'absolute', top: '96px', left: 0, right: 0, boxShadow: '0px 2px 5px rgba(0,0,0,0.4)', height: '30px' }} >
+        <Navbar className='home p-1' variant="light"  style={{ color: 'black', boxShadow: '0px 2px 5px rgba(0,0,0,0.4)', height: '30px' }} >
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
