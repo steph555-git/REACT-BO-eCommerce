@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { Box, Button, FormControl, TextField, InputLabel, OutlinedInput, IconButton, InputAdornment, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom'
+import { Box, Button, FormControl, TextField, InputLabel, OutlinedInput, IconButton, InputAdornment, Typography } from '@mui/material'
+import Alert from '@mui/material/Alert'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { UserAuth } from '../../context/AuthContext'
 
@@ -26,7 +27,7 @@ const Login = () => {
             await logIn(email, password)
             navigate('/')
         } catch (e) {
-            setError(e.message)
+            setError(true)
             console.log(e.message)
         }
     }
@@ -37,6 +38,7 @@ const Login = () => {
             console.log('You are logged out')
         } catch (error) {
             console.log(error.message)
+
         }
     }
     return (
@@ -75,6 +77,8 @@ const Login = () => {
                     autoComplete="off"
                 >
                     <p style={{ textAlign: 'center', marginBottom: '20px', fontWeight: '400', fontSize: '18px' }}>Connexion au backoffice</p>
+                    {error &&
+                        < Alert severity="error" > Error alert — login or password incorrect!</Alert >}
                     <TextField
                         id="user-email"
                         label="Email"
