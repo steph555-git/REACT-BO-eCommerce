@@ -4,79 +4,79 @@ import DataTable from 'react-data-table-component'
 
 import './Products.css'
 
-const columns = [
-    {
-        name: 'ID',
-        selector: row => row.title,
-        sortable: true,
-    },
-    {
-        name: 'GAMME',
-        selector: row => row.director,
-        sortable: true,
-    },
-    {
-        name: 'PHOTO',
-        selector: row => row.year,
-        sortable: true,
-    },
-    {
-        name: 'REFERENCE',
-        selector: row => row.year,
-        sortable: true,
-    },
-    {
-        name: 'CODE EAN',
-        selector: row => row.year,
-        sortable: true,
-    },
-    {
-        name: 'MARQUE',
-        selector: row => row.year,
-        sortable: true,
-    },
-    {
-        name: 'REF FOURNISSEUR',
-        selector: row => row.year,
-        sortable: true,
-    },
-    {
-        name: 'TITRE',
-        selector: row => row.year,
-        sortable: true,
-    },
-    {
-        name: 'VISIBLE',
-        selector: row => row.year,
-        sortable: true,
-    },
-    {
-        name: 'PRIX A. HT',
-        selector: row => row.year,
-        sortable: true,
-    },
-    {
-        name: 'MARGE',
-        selector: row => row.year,
-        sortable: true,
-    },
-    {
-        name: 'PRIX V. TTC',
-        selector: row => row.year,
-        sortable: true,
-    },
-    {
-        name: 'STOCKS',
-        selector: row => row.year,
-        sortable: true,
-    },
-    {
-        name: 'NB VENTE',
-        selector: row => row.year,
-        sortable: true,
-    },
-];
-
+//const columns = [
+//    {
+//        name: 'ID',
+//        selector: row => row.title,
+//        sortable: true,
+//    },
+//    {
+//        name: 'GAMME',
+//        selector: row => row.director,
+//        sortable: true,
+//    },
+//    {
+//        name: 'PHOTO',
+//        selector: row => row.year,
+//        sortable: true,
+//    },
+//    {
+//        name: 'REFERENCE',
+//        selector: row => row.year,
+//        sortable: true,
+//    },
+//    {
+//        name: 'CODE EAN',
+//        selector: row => row.year,
+//        sortable: true,
+//    },
+//    {
+//        name: 'MARQUE',
+//        selector: row => row.year,
+//        sortable: true,
+//    },
+//    {
+//        name: 'REF FOURNISSEUR',
+//        selector: row => row.year,
+//        sortable: true,
+//    },
+//    {
+//        name: 'TITRE',
+//        selector: row => row.year,
+//        sortable: true,
+//    },
+//    {
+//        name: 'VISIBLE',
+//        selector: row => row.year,
+//        sortable: true,
+//    },
+//    {
+//        name: 'PRIX A. HT',
+//        selector: row => row.year,
+//        sortable: true,
+//    },
+//    {
+//        name: 'MARGE',
+//        selector: row => row.year,
+//        sortable: true,
+//    },
+//    {
+//        name: 'PRIX V. TTC',
+//        selector: row => row.year,
+//        sortable: true,
+//    },
+//    {
+//        name: 'STOCKS',
+//        selector: row => row.year,
+//        sortable: true,
+//    },
+//    {
+//        name: 'NB VENTE',
+//        selector: row => row.year,
+//        sortable: true,
+//    },
+//];
+//
 const ListProducts = () => {
     return (
         <>
@@ -130,21 +130,3 @@ const ListProducts = () => {
 export default ListProducts
 
 
-23
-24export const Basic = () => {
-    25	return <DataTable title="Movie List" columns={columns} data={data} pagination />;
-    26
-};
-27
-28export default {
-    29	title: 'Sorting/Basic',
-        30	component: Basic,
-            31	parameters: {
-                32		docs: {
-                    33			page: doc,
-                        34
-                },
-                35
-            },
-    36
-};

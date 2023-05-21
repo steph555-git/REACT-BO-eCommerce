@@ -1,49 +1,49 @@
 
 h3{
-color: white;
-margin: 10px;
-padding-left: 20px;
-}
-.tab-color{
-  width: 110px;
-  text-align: center;
-  margin:1px;
-  background-color: #4f4f4f;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-}
-.website{
-  margin:1px;
-  background-color: #4f4f4f;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-  width: 50px;
-  text-align: center;
-}
-.navbar-dark .navbar-nav .nav-link.active {
-  color: black; 
-}
-.home.tab-color.active{
-  background-color: #d8d8d8;
-}
-.products.tab-color.active{
-  background-color: #da8181;
-}
-.tab-color.customers.active{
-  background-color: #f6b160;
-}
-.tab-color.orders.active{
-  background-color: #cdaa70;
-}
-.tab-color.articles.active{
-  background-color: #9ec3ed;
-}
-.tab-color.statistics.active{
-  background-color: #c5b3ed;
-}
-.tab-color.site.active{
-  background-color: #91d9af;
-}
-.tab-color.settings.active{
-  background-color: #c5ceee;;
-}
+  color: white;
+  margin: 10px;
+  padding-left: 20px;
+  }
+  .tab-color{
+    width: 110px;
+    text-align: center;
+    margin:1px;
+    background-color: #4f4f4f;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+  }
+  .website{
+    margin:1px;
+    background-color: #4f4f4f;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    width: 50px;
+    text-align: center;
+  }
+  .navbar-dark .navbar-nav .nav-link.active {
+    color: black; 
+  }
+  .home.tab-color.active{
+    background-color: #d8d8d8;
+  }
+  .products.tab-color.active{
+    background-color: #da8181;
+  }
+  .tab-color.customers.active{
+    background-color: #f6b160;
+  }
+  .tab-color.orders.active{
+    background-color: #cdaa70;
+  }
+  .tab-color.articles.active{
+    background-color: #9ec3ed;
+  }
+  .tab-color.statistics.active{
+    background-color: #c5b3ed;
+  }
+  .tab-color.site.active{
+    background-color: #91d9af;
+  }
+  .tab-color.settings.active{
+    background-color: #c5ceee;;
+  }

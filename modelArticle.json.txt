@@ -1,0 +1,26 @@
+{
+	informations:{
+		date: date
+		hour: date
+		state: boolean
+		title: string
+		author: string
+		chapeau: longString
+		descritpion: longSring
+	}
+	categories:{
+		first:
+		second:
+		third:
+		fourth:
+	}
+	images:{
+	principal: url
+	secondary: url
+	}
+	seo:{
+		indexation : boolean
+		metaTitle: string
+	}
+}
+	
