@@ -1,0 +1,13 @@
+.footer{
+    background-color: black;
+    color: white;
+    position: absolute;
+    bottom: 0px;
+    width: 99%;
+    height: 30px;
+    text-align: center;
+    border: solid;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+}

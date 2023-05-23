@@ -1,0 +1,16 @@
+.headerDiv{
+    background-color: rgb(166, 199, 222);
+    color: white;
+    border: 1px solid;
+    border-color: rgb(17, 17, 156);
+    margin: 8px;
+    padding: 4px;
+    font-weight:500;
+    display: flex;
+    align-items: center;
+}
+.headerDiv p {
+    margin-top: 3px;
+    margin-bottom: 2px;
+    font-size: 10px;
+}
