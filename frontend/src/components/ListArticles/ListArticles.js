@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 
 
-import './ListArticles.css'
+import styles from './ListArticles.module.css'
 
 const rows = [
     { id: 1, category: 'Hello', image: 'World' },
@@ -22,7 +22,7 @@ const columns = [
     { field: 'visibility', headerName: 'VISIBILITY', headerClassName: 'super-app-theme--header', flex: 150 },
     { field: 'update', headerName: 'UPDATE', headerClassName: 'super-app-theme--header', flex: 150 },
     { field: 'see', headerName: 'SEE', headerClassName: 'super-app-theme--header', flex: 50 },
-];
+]
 
 const ListArticles = () => {
 
@@ -48,7 +48,7 @@ const ListArticles = () => {
                     backgroundColor: 'rgb(79, 79, 79)',
                     color: 'white',
                 },
-            }}>
+            }}>{/**list item en mobile */}
             <DataGrid
                 rows={rows}
                 columns={columns}
@@ -56,7 +56,6 @@ const ListArticles = () => {
                 checkboxSelection
                 onRowSelectionModelChange={handleSelectionModel}
                 onRowDoubleClick={handleDoubleClick}
-            //rowSelectionModel={rowSelectionModel}
             />
         </Box>
     )

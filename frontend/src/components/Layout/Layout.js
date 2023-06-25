@@ -1,16 +1,21 @@
 import React from 'react'
+import { Container } from '@mui/material'
+
 import Nav from '../Nav/Nav'
+import SubNav from '../Nav/SubNav'
+
 import Footer from '../Footer/Footer'
 
-import classes from './Layout.css'
+import styles from './Layout.module.css'
 
 const Layout = (props) => {
     return (
         <>
             <Nav />
-            <main>
+            <SubNav />
+            <Container maxWidth="xl">
                 {props.children}
-            </main>
+            </Container>
             <Footer />
         </>
     )

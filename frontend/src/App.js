@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom'
 
 import Login from './pages/Login/Login';
@@ -13,9 +13,20 @@ import Site from './pages/Site/Site'
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
+import { setSubNav } from '../src/redux/slices/subNav.slice'
+import { useDispatch } from 'react-redux'
+
 import './App.css';
 
 function App() {
+  const dispatch = useDispatch()
+
+  //const [stateSubNav, setStateSubNav] = useState([])
+
+  const homeSubNav = [{ label: 'Liste des leads', path: 'listeleads' }, { label: 'RGPD', path: 'rgpd' }]
+  const articlesSubNav = [{ label: 'Liste des articles', path: '' }, { label: 'Nouvel article', path: '' }, { label: 'Nouvel article IA', path: '' }]
+  const settingsSubNav = [{ label: 'Paramètres blog', path: '' }]
+  const statisticsSubNav = [{ label: 'Stats Leads', path: '' }]
 
   return (
 
@@ -25,12 +36,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/*<Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />*/}
-        <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-        <Route path="/articles" element={<ProtectedRoute><Articles /></ProtectedRoute>} />
+        <Route path="/home" element={<ProtectedRoute><Home onClick={dispatch(setSubNav(homeSubNav))} /></ProtectedRoute>} />
+        <Route path="/articles" element={<ProtectedRoute><Articles onClick={dispatch(setSubNav(articlesSubNav))} /></ProtectedRoute>} />
         <Route path="/editarticle/:id" element={<ProtectedRoute><EditArticle /></ProtectedRoute>} />
-        <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
-        <Route path="/statistics" element={<ProtectedRoute><Statistics /></ProtectedRoute>} />
+        <Route path="/settings" element={<ProtectedRoute><Settings onClick={dispatch(setSubNav(settingsSubNav))} /></ProtectedRoute>} />
+        <Route path="/statistics" element={<ProtectedRoute><Statistics onClick={dispatch(setSubNav(statisticsSubNav))} /></ProtectedRoute>} />
         <Route path="/site" element={<ProtectedRoute><Site /></ProtectedRoute>} />
 
       </Routes>

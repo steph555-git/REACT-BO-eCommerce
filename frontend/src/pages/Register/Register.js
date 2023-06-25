@@ -4,6 +4,8 @@ import { Box, Button, FormControl, TextField, InputLabel, OutlinedInput, IconBut
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { UserAuth } from '../../context/AuthContext'
 
+import styles from './Register.module.css'
+
 const Register = () => {
 
     const [email, setEmail] = useState('')

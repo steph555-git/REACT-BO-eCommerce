@@ -1,37 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { useNavigate, Link } from 'react-router-dom'
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu } from '@mui/material';
-import { Avatar, Button, Tooltip, MenuItem, Container } from '@mui/material';
+import { Button, MenuItem, Container } from '@mui/material';
+import Badge from '@mui/material/Badge'
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { UserAuth } from '../../context/AuthContext'
 
-import classes from './Nav.css'
+//import styles from './Nav.module.css'
 
 const pages = ['Home', 'Articles', 'Settings', 'Statistics', 'Site'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 const Nav = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);
-    const [anchorElUser, setAnchorElUser] = useState(null);
     const { logOut } = UserAuth()
     const navigate = useNavigate()
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
     const darkTheme = createTheme({
         palette: {
             mode: 'dark',
@@ -103,16 +97,32 @@ const Nav = () => {
                                     display: { xs: 'block', md: 'none' },
                                 }}
                             >
-                                {pages.map((page) => (
-                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center" >
-                                            <Link to={`/${page.toLowerCase()}`}
-                                                style={{
-                                                    color: 'white',
-                                                    textDecoration: 'none',
-                                                }}>{page}</Link>
-                                        </Typography>
-                                    </MenuItem>
+                                {pages.map((page, index) => (
+                                    index === 0 ? (
+                                        <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                            <Badge badgeContent={3} color="error">
+                                                <Typography textAlign="center" >
+                                                    <Link to={`/${page.toLowerCase()}`}
+                                                        style={{
+                                                            color: 'white',
+                                                            textDecoration: 'none',
+                                                        }}>{page}</Link>
+                                                </Typography>
+                                            </Badge>
+                                        </MenuItem>
+
+                                    ) : (
+                                        <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                            <Typography textAlign="center" >
+                                                <Link to={`/${page.toLowerCase()}`}
+                                                    style={{
+                                                        color: 'white',
+                                                        textDecoration: 'none',
+                                                    }}>{page}</Link>
+                                            </Typography>
+                                        </MenuItem>
+                                    )
+
                                 ))}
                             </Menu>
                         </Box>
@@ -136,67 +146,41 @@ const Nav = () => {
                             BACKOFFICE
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                            {pages.map((page) => (
-                                <Button
-                                    key={page}
-                                    component={Link}
-                                    to={`/${page.toLowerCase()}`}
-                                    onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, mx: 2, textAlign: 'center', color: 'white', display: 'block' }}
-                                >
-                                    {page}
-                                </Button>
+                            {pages.map((page, index) => (
+                                <React.Fragment key={page}>
+                                    {index === 0 ? (
+
+                                        <Button
+                                            key={page}
+                                            component={Link}
+                                            to={`/${page.toLowerCase()}`}
+                                            onClick={handleCloseNavMenu}
+                                            sx={{ my: 2, mx: 2, textAlign: 'center', color: 'white', display: 'block' }}
+                                        >
+                                            <Badge badgeContent={3} color="error" >
+                                                {page}
+                                            </Badge>
+                                        </Button>
+
+                                    ) : (
+                                        <Button
+                                            key={page}
+                                            component={Link}
+                                            to={`/${page.toLowerCase()}`}
+                                            onClick={handleCloseNavMenu}
+                                            sx={{ my: 2, mx: 2, textAlign: 'center', color: 'white', display: 'block' }}
+                                        >
+                                            {page}
+                                        </Button>
+                                    )}
+                                </React.Fragment>
                             ))}
                         </Box>
-
-                        <Box sx={{ flexGrow: 0 }}>
-                            <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                                </IconButton>
-                            </Tooltip>
-                            <Menu
-                                sx={{ mt: '45px' }}
-                                id="menu-appbar"
-                                anchorEl={anchorElUser}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(anchorElUser)}
-                                onClose={handleCloseUserMenu}
-                            >
-                                {/*settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center">{setting}</Typography>
-                                    </MenuItem>
-                                ))*/}
-                                {settings.map((setting) => {
-                                    if (setting === 'Logout') {
-                                        return (
-                                            <MenuItem key={setting} onClick={logout}>
-                                                <Typography textAlign="center">{setting}</Typography>
-                                            </MenuItem>
-                                        );
-                                    } else {
-                                        return (
-                                            <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                                <Typography textAlign="center">{setting}</Typography>
-                                            </MenuItem>
-                                        );
-                                    }
-                                })}
-                            </Menu>
-                        </Box>
+                        <ExitToAppIcon onClick={logout} fontSize='medium' style={{ cursor: 'pointer' }} />
                     </Toolbar>
                 </Container>
             </AppBar>
-        </ThemeProvider>
+        </ThemeProvider >
     )
 }
 

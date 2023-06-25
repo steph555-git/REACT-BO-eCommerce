@@ -13,7 +13,7 @@ import Images from '../../components/Articles/Images'
 import Seo from '../../components/Articles/Seo'
 import Stats from '../../components/Articles/Stats'
 
-import './EditArticles.css'
+import styles from './EditArticles.module.css'
 
 const TabPanel = (props) => {
     const { children, value, index, ...other } = props;

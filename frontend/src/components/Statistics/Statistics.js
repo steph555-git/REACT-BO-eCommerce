@@ -6,7 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 
-import './Statistics.css'
+import styles from './Statistics.module.css'
 
 const Statistics = () => {
     return (

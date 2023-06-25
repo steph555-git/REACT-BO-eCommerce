@@ -7,6 +7,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { UserAuth } from '../../context/AuthContext'
 
+import styles from './Login.module.css'
+
 const Login = () => {
 
     const { logIn } = UserAuth()
@@ -42,7 +44,7 @@ const Login = () => {
                 component="div"
                 variant="body1"
                 style={{
-                    height: '50vh',
+                    height: '60vh',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',

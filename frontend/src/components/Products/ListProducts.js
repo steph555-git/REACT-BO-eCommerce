@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Table from 'react-bootstrap/Table'
 import DataTable from 'react-data-table-component'
 
-import './Products.css'
+import styles from './Products.module.css'
 
 //const columns = [
 //    {

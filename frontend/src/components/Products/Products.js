@@ -9,7 +9,7 @@ import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
 import ListProducts from './ListProducts'
 
-import './Products.css'
+import styles from './Products.module.css'
 
 const Products = () => {
 
