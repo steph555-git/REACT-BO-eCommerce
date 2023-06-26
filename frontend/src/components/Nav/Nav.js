@@ -11,8 +11,7 @@ import { UserAuth } from '../../context/AuthContext'
 
 import { setSubNav } from '../../redux/slices/subNav.slice'
 import { useDispatch } from 'react-redux'
-
-//import styles from './Nav.module.css'
+import { homeSubNav, articlesSubNav, settingsSubNav, statisticsSubNav } from '../../utils/contentSubNavBar'
 
 const pages = ['home', 'articles', 'settings', 'statistics', 'site'];
 
@@ -49,21 +48,6 @@ const Nav = () => {
 
         }
     }
-    const homeSubNav = [
-        { label: 'Liste des leads', path: 'listeleads' },
-        { label: 'RGPD', path: 'rgpd' }
-    ]
-    const articlesSubNav = [
-        { label: 'Liste des articles', path: 'articles' },
-        { label: 'Nouvel article', path: 'newarticle' },
-        { label: 'Nouvel article IA', path: 'newarticleai' }
-    ]
-    const settingsSubNav = [
-        { label: 'Paramètres blog', path: '' }
-    ]
-    const statisticsSubNav = [
-        { label: 'Stats Leads', path: '' }
-    ]
 
     const handleNavBar = (page) => {
         switch (page) {
