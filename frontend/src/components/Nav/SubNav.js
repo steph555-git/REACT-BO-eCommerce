@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux'
 
 const SubNav = () => {
     const SOUSPAGES = useSelector(getSubNav)
-    console.log('sousPages', SOUSPAGES)
 
     const [anchorElNav, setAnchorElNav] = useState(null);
     const navigate = useNavigate()

@@ -9,11 +9,16 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { UserAuth } from '../../context/AuthContext'
 
+import { setSubNav } from '../../redux/slices/subNav.slice'
+import { useDispatch } from 'react-redux'
+
 //import styles from './Nav.module.css'
 
-const pages = ['Home', 'Articles', 'Settings', 'Statistics', 'Site'];
+const pages = ['home', 'articles', 'settings', 'statistics', 'site'];
 
 const Nav = () => {
+    const dispatch = useDispatch()
+
     const [anchorElNav, setAnchorElNav] = useState(null);
     const { logOut } = UserAuth()
     const navigate = useNavigate()
@@ -44,6 +49,43 @@ const Nav = () => {
 
         }
     }
+    const homeSubNav = [
+        { label: 'Liste des leads', path: 'listeleads' },
+        { label: 'RGPD', path: 'rgpd' }
+    ]
+    const articlesSubNav = [
+        { label: 'Liste des articles', path: 'articles' },
+        { label: 'Nouvel article', path: 'newarticle' },
+        { label: 'Nouvel article IA', path: 'newarticleai' }
+    ]
+    const settingsSubNav = [
+        { label: 'Paramètres blog', path: '' }
+    ]
+    const statisticsSubNav = [
+        { label: 'Stats Leads', path: '' }
+    ]
+
+    const handleNavBar = (page) => {
+        switch (page) {
+            case 'home':
+                dispatch(setSubNav(homeSubNav));
+                break;
+            case 'articles':
+                dispatch(setSubNav(articlesSubNav));
+                break;
+            case 'settings':
+                dispatch(setSubNav(settingsSubNav));
+                break;
+            case 'statistics':
+                dispatch(setSubNav(statisticsSubNav));
+                break;
+            case 'site':
+                navigate('https://www.monsite.com');
+                break;
+            default:
+                break;
+        }
+    }
     return (
         <ThemeProvider theme={darkTheme}>
             <AppBar position="static" color='primary'>
@@ -68,6 +110,7 @@ const Nav = () => {
                             BACKOFFICE
                         </Typography>
 
+                        {/*--------  MOBILE ------- */}
                         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                             <IconButton
                                 size="large"
@@ -106,7 +149,9 @@ const Nav = () => {
                                                         style={{
                                                             color: 'white',
                                                             textDecoration: 'none',
-                                                        }}>{page}</Link>
+                                                        }}
+                                                        onClick={() => handleNavBar(page)}
+                                                    >{page}</Link>
                                                 </Typography>
                                             </Badge>
                                         </MenuItem>
@@ -118,7 +163,9 @@ const Nav = () => {
                                                     style={{
                                                         color: 'white',
                                                         textDecoration: 'none',
-                                                    }}>{page}</Link>
+                                                    }}
+                                                    onClick={() => handleNavBar(page)}
+                                                >{page}</Link>
                                             </Typography>
                                         </MenuItem>
                                     )
@@ -126,6 +173,8 @@ const Nav = () => {
                                 ))}
                             </Menu>
                         </Box>
+
+                        {/*--------  DESKTOP ------- */}
                         <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                         <Typography
                             variant="h5"
@@ -145,37 +194,37 @@ const Nav = () => {
                         >
                             BACKOFFICE
                         </Typography>
+
+
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             {pages.map((page, index) => (
-                                <React.Fragment key={page}>
-                                    {index === 0 ? (
-
-                                        <Button
-                                            key={page}
-                                            component={Link}
-                                            to={`/${page.toLowerCase()}`}
-                                            onClick={handleCloseNavMenu}
-                                            sx={{ my: 2, mx: 2, textAlign: 'center', color: 'white', display: 'block' }}
-                                        >
-                                            <Badge badgeContent={3} color="error" >
-                                                {page}
-                                            </Badge>
-                                        </Button>
-
-                                    ) : (
-                                        <Button
-                                            key={page}
-                                            component={Link}
-                                            to={`/${page.toLowerCase()}`}
-                                            onClick={handleCloseNavMenu}
-                                            sx={{ my: 2, mx: 2, textAlign: 'center', color: 'white', display: 'block' }}
-                                        >
+                                index === 0 ? (
+                                    <Button
+                                        key={page}
+                                        component={Link}
+                                        to={`/${page.toLowerCase()}`}
+                                        onClick={() => handleNavBar(page)}
+                                        sx={{ my: 2, mx: 2, textAlign: 'center', color: 'white', display: 'block' }}
+                                    >
+                                        <Badge badgeContent={3} color="error" >
                                             {page}
-                                        </Button>
-                                    )}
-                                </React.Fragment>
+                                        </Badge>
+                                    </Button>
+
+                                ) : (
+                                    <Button
+                                        key={page}
+                                        component={Link}
+                                        to={`/${page.toLowerCase()}`}
+                                        onClick={() => handleNavBar(page)}
+                                        sx={{ my: 2, mx: 2, textAlign: 'center', color: 'white', display: 'block' }}
+                                    >
+                                        {page}
+                                    </Button>
+                                )
                             ))}
                         </Box>
+                        {/*--------  LOGOUT ------- */}
                         <ExitToAppIcon onClick={logout} fontSize='medium' style={{ cursor: 'pointer' }} />
                     </Toolbar>
                 </Container>

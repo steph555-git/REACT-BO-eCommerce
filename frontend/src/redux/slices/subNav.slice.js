@@ -8,18 +8,17 @@ export const subNavSlice = createSlice({
     ],
     reducers: {
         setSubNav: (state, action) => {
-            console.log("action: ", action);
-            state = action.payload;
+            console.log("action: ", action.payload);
+            return action.payload;
         },
 
     },
 });
 
-// export qui servira pour mes fonctions
 export const { setSubNav } = subNavSlice.actions;
 
 export const getSubNav = (state) => {
-    // console.log("state***", state)
+    console.log("state***get", state)
     return state.subNav
 }
 
