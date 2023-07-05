@@ -7,10 +7,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { getSubNav } from '../../redux/slices/subNav.slice'
 import { useSelector } from 'react-redux'
 
-const SubNav = () => {
-    const SOUSPAGES = useSelector(getSubNav)
+const SubNav = ({ dataSubNav }) => {
+    const SOUSPAGES = dataSubNav
 
-    
     const [anchorElNav, setAnchorElNav] = useState(null);
 
     const handleOpenNavMenu = (event) => {

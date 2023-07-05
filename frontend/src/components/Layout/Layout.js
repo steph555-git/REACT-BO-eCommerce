@@ -8,7 +8,6 @@ const Layout = (props) => {
     return (
         <>
             <Nav />
-            <SubNav />
             <Container maxWidth="xl">
                 {props.children}
             </Container>
