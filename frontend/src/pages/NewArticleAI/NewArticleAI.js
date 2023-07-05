@@ -1,18 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import StepperCompo from './StepperCompo';
+import { getEtapeActive } from '../../redux/slices/stepsGenerateArticleAI.slice'
+import { useSelector } from 'react-redux'
+
 import Step1 from './Step1';
 
 const NewArticleAI = () => {
-    const [etapeActive, setEtapeActive] = useState(0);
-
+    const ETAPE_ACTIVE = useSelector(getEtapeActive)
     return (
         <>
-
-            <StepperCompo etapeActive={etapeActive} />
-
-            <Step1 />
-
+            <Step1 etapeActive={ETAPE_ACTIVE} />
         </>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom'
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu } from '@mui/material';
 import { Button, MenuItem, Container } from '@mui/material';
@@ -19,6 +19,7 @@ const Nav = () => {
     const dispatch = useDispatch()
 
     const [anchorElNav, setAnchorElNav] = useState(null);
+    const [dataSubNav, setDataSubNav] = useState([])
     const { logOut } = UserAuth()
     const navigate = useNavigate()
 
@@ -49,27 +50,40 @@ const Nav = () => {
         }
     }
 
-    const handleNavBar = (page) => {
-        switch (page) {
-            case 'home':
-                dispatch(setSubNav(homeSubNav));
-                break;
-            case 'articles':
-                dispatch(setSubNav(articlesSubNav));
-                break;
-            case 'settings':
-                dispatch(setSubNav(settingsSubNav));
-                break;
-            case 'statistics':
-                dispatch(setSubNav(statisticsSubNav));
-                break;
-            case 'site':
-                navigate('https://www.monsite.com');
-                break;
-            default:
-                break;
+    const handleNavBar = async (page) => {
+        const pageUpperCase = page.toUpperCase()
+
+        try {
+            const response = await fetch(`http://localhost:4000/subnav?name=${pageUpperCase}`)
+            const jsonData = await response.json()
+            setDataSubNav(jsonData)
+        } catch (error) {
+            console.error('Error:', error)
         }
+
+
+        // switch (page) {
+        //     case 'home':
+        //         dispatch(setSubNav(homeSubNav));
+        //         break;
+        //     case 'articles':
+        //         dispatch(setSubNav(articlesSubNav));
+        //         break;
+        //     case 'settings':
+        //         dispatch(setSubNav(settingsSubNav));
+        //         break;
+        //     case 'statistics':
+        //         dispatch(setSubNav(statisticsSubNav));
+        //         break;
+        //     case 'site':
+        //         navigate('https://www.monsite.com');
+        //         break;
+        //     default:
+        //         break;
+        // }
     }
+    useEffect(() => console.log('dataSubNav', dataSubNav), [dataSubNav])
+
     return (
         <ThemeProvider theme={darkTheme}>
             <AppBar position="static" color='primary'>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom'
 
 import Login from './pages/Login/Login';
@@ -15,6 +15,7 @@ import Site from './pages/Site/Site'
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
+import Step2 from './pages/NewArticleAI/Step2';
 import './App.css';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
         <Route path="/statistics" element={<ProtectedRoute><Statistics /></ProtectedRoute>} />
         <Route path="/site" element={<ProtectedRoute><Site /></ProtectedRoute>} />
+        <Route path="/step2" element={<ProtectedRoute><Step2 /></ProtectedRoute>} />
 
       </Routes>
     </AuthContextProvider>
