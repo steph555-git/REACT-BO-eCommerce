@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link, useLocation } from 'react-router-dom'
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu } from '@mui/material';
 import { Button, MenuItem, Container } from '@mui/material';
 import Badge from '@mui/material/Badge'
@@ -9,19 +9,20 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { UserAuth } from '../../context/AuthContext'
 import SubNav from './SubNav'
-import { setSubNav } from '../../redux/slices/subNav.slice'
-import { useDispatch } from 'react-redux'
-import { homeSubNav, articlesSubNav, settingsSubNav, statisticsSubNav } from '../../utils/contentSubNavBar'
 
 const pages = ['home', 'articles', 'settings', 'statistics', 'site'];
 
 const Nav = () => {
-    const dispatch = useDispatch()
 
     const [anchorElNav, setAnchorElNav] = useState(null);
-    const [dataSubNav, setDataSubNav] = useState([])
+    const [allDataSubNav, setAllDataSubNav] = useState([])
+    const [dataToSubNav, setDataToSubNav] = useState([])
     const { logOut } = UserAuth()
     const navigate = useNavigate()
+    const location = useLocation()
+
+    const toSubNav = location.pathname.slice(1)
+    const indexPage = pages.indexOf(toSubNav)
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -50,22 +51,34 @@ const Nav = () => {
         }
     }
 
-    const handleNavBar = async (page) => {
-        const pageUpperCase = page.toUpperCase()
+    useEffect(() => {
 
-        try {
-            const response = await fetch(`http://localhost:4000/subnav?name=${pageUpperCase}`)
-            const jsonData = await response.json()
-            const filteredData = Object.fromEntries(
-                Object.entries(jsonData[0]).filter(([key, value]) => value !== null)
-            );
-            const valuesArray = Object.values(filteredData)
-            setDataSubNav(valuesArray)
-        } catch (error) {
-            console.error('Error:', error)
-        }
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://localhost:4000/subnav');
+                const jsonData = await response.json();
 
-    }
+                const filteredData = jsonData.map(obj => {
+                    const newObj = [];
+                    for (const key in obj) {
+                        if (obj[key] !== null) {
+                            newObj.label = obj[key].label;
+                            newObj.path = obj[key].path;
+                        }
+                    }
+                    return newObj;
+                });
+                setAllDataSubNav(filteredData)
+                setDataToSubNav(filteredData[indexPage])
+
+            } catch (error) {
+                console.error('Erreur lors de la récupération des données :', error);
+            }
+        };
+        fetchData();
+    }, [toSubNav, indexPage])
+
+    console.log(dataToSubNav)
 
     return (
         <>
@@ -184,7 +197,8 @@ const Nav = () => {
                     </Container>
                 </AppBar>
             </ThemeProvider >
-            <SubNav dataSubNav={dataSubNav} />
+
+            {dataToSubNav && <SubNav dataToSubNav={dataToSubNav} />}
         </>
     )
 }
