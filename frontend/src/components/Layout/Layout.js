@@ -2,7 +2,6 @@ import React from 'react'
 import { Container } from '@mui/material'
 
 import Nav from '../Nav/Nav'
-import SubNav from '../Nav/SubNav'
 
 const Layout = (props) => {
     return (

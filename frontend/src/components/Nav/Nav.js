@@ -65,26 +65,6 @@ const Nav = () => {
             console.error('Error:', error)
         }
 
-
-        // switch (page) {
-        //     case 'home':
-        //         dispatch(setSubNav(homeSubNav));
-        //         break;
-        //     case 'articles':
-        //         dispatch(setSubNav(articlesSubNav));
-        //         break;
-        //     case 'settings':
-        //         dispatch(setSubNav(settingsSubNav));
-        //         break;
-        //     case 'statistics':
-        //         dispatch(setSubNav(statisticsSubNav));
-        //         break;
-        //     case 'site':
-        //         navigate('https://www.monsite.com');
-        //         break;
-        //     default:
-        //         break;
-        // }
     }
 
     return (
@@ -143,35 +123,19 @@ const Nav = () => {
                                     }}
                                 >
                                     {pages.map((page, index) => (
-                                        index === 0 ? (
-                                            <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                                <Badge badgeContent={3} color="error">
-                                                    <Typography textAlign="center" >
-                                                        <Link to={`/${page.toLowerCase()}`}
-                                                            style={{
-                                                                color: 'white',
-                                                                textDecoration: 'none',
-                                                            }}
-                                                            onClick={() => handleNavBar(page)}
-                                                        >{page}</Link>
-                                                    </Typography>
-                                                </Badge>
-                                            </MenuItem>
-
-                                        ) : (
-                                            <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                                <Typography textAlign="center" >
-                                                    <Link to={`/${page.toLowerCase()}`}
-                                                        style={{
-                                                            color: 'white',
-                                                            textDecoration: 'none',
-                                                        }}
-                                                        onClick={() => handleNavBar(page)}
-                                                    >{page}</Link>
-                                                </Typography>
-                                            </MenuItem>
-                                        )
-
+                                        <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                            <Typography textAlign="center" >
+                                                <Link to={`/${page.toLowerCase()}`}
+                                                    style={{
+                                                        color: 'white',
+                                                        textDecoration: 'none',
+                                                    }}>
+                                                    {index === 0 ? (<Badge badgeContent={3} color="error">{page}</Badge>
+                                                    ) : (page)
+                                                    }
+                                                </Link>
+                                            </Typography>
+                                        </MenuItem>
                                     ))}
                                 </Menu>
                             </Box>
@@ -197,33 +161,21 @@ const Nav = () => {
                                 BACKOFFICE
                             </Typography>
 
-
                             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                                 {pages.map((page, index) => (
-                                    index === 0 ? (
-                                        <Button
-                                            key={page}
-                                            component={Link}
-                                            to={`/${page.toLowerCase()}`}
-                                            onClick={() => handleNavBar(page)}
-                                            sx={{ my: 2, mx: 2, textAlign: 'center', color: 'white', display: 'block' }}
-                                        >
+                                    <Button
+                                        key={page}
+                                        component={Link}
+                                        to={`/${page.toLowerCase()}`}
+                                        sx={{ my: 2, mx: 2, textAlign: 'center', color: 'white', display: 'block' }}
+                                    >
+                                        {index === 0 ? (
                                             <Badge badgeContent={3} color="error" >
                                                 {page}
                                             </Badge>
-                                        </Button>
-
-                                    ) : (
-                                        <Button
-                                            key={page}
-                                            component={Link}
-                                            to={`/${page.toLowerCase()}`}
-                                            onClick={() => handleNavBar(page)}
-                                            sx={{ my: 2, mx: 2, textAlign: 'center', color: 'white', display: 'block' }}
-                                        >
-                                            {page}
-                                        </Button>
-                                    )
+                                        ) : (page)
+                                        }
+                                    </Button>
                                 ))}
                             </Box>
                             {/*--------  LOGOUT ------- */}
