@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom'
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu } from '@mui/material';
-import { Button, MenuItem, Container } from '@mui/material';
-import Badge from '@mui/material/Badge'
+import { Button, MenuItem, Container, Badge } from '@mui/material';
+
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { UserAuth } from '../../context/AuthContext'
+
 import SubNav from './SubNav'
 
 const pages = ['home', 'articles', 'settings', 'statistics', 'site'];
@@ -22,7 +23,6 @@ const Nav = () => {
 
     const navPathName = location.pathname.slice(1)
     const categoryName = navPathName.split('/')[0]
-
     let indexPage = pages.indexOf(categoryName)
 
     const handleOpenNavMenu = (event) => {
@@ -198,7 +198,7 @@ const Nav = () => {
                 </AppBar>
             </ThemeProvider >
 
-            {dataToSubNav && <SubNav dataToSubNav={dataToSubNav} navPathName={categoryName} />}
+            {dataToSubNav && <SubNav dataToSubNav={dataToSubNav} categoryName={categoryName} />}
         </>
     )
 }
