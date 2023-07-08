@@ -13,16 +13,17 @@ import SubNav from './SubNav'
 const pages = ['home', 'articles', 'settings', 'statistics', 'site'];
 
 const Nav = () => {
-
-    const [anchorElNav, setAnchorElNav] = useState(null);
-    const [allDataSubNav, setAllDataSubNav] = useState([])
-    const [dataToSubNav, setDataToSubNav] = useState([])
     const { logOut } = UserAuth()
     const navigate = useNavigate()
     const location = useLocation()
 
-    const toSubNav = location.pathname.slice(1)
-    const indexPage = pages.indexOf(toSubNav)
+    const [anchorElNav, setAnchorElNav] = useState(null);
+    const [dataToSubNav, setDataToSubNav] = useState([])
+
+    const navPathName = location.pathname.slice(1)
+    const categoryName = navPathName.split('/')[0]
+
+    let indexPage = pages.indexOf(categoryName)
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -58,27 +59,26 @@ const Nav = () => {
                 const response = await fetch('http://localhost:4000/subnav');
                 const jsonData = await response.json();
 
-                const filteredData = jsonData.map(obj => {
-                    const newObj = [];
-                    for (const key in obj) {
-                        if (obj[key] !== null) {
-                            newObj.label = obj[key].label;
-                            newObj.path = obj[key].path;
+                const filteredData = jsonData.map(item => {
+                    const newItem = [];
+                    for (const key in item) {
+                        if (item[key] !== null) {
+                            newItem.push(item[key]);
                         }
                     }
-                    return newObj;
+                    return newItem;
                 });
-                setAllDataSubNav(filteredData)
-                setDataToSubNav(filteredData[indexPage])
+
+                setDataToSubNav(
+                    indexPage === -1 ? filteredData[0] : filteredData[indexPage]
+                )
 
             } catch (error) {
                 console.error('Erreur lors de la récupération des données :', error);
             }
         };
         fetchData();
-    }, [toSubNav, indexPage])
-
-    console.log(dataToSubNav)
+    }, [categoryName, indexPage])
 
     return (
         <>
@@ -198,7 +198,7 @@ const Nav = () => {
                 </AppBar>
             </ThemeProvider >
 
-            {dataToSubNav && <SubNav dataToSubNav={dataToSubNav} />}
+            {dataToSubNav && <SubNav dataToSubNav={dataToSubNav} navPathName={categoryName} />}
         </>
     )
 }

@@ -25,11 +25,16 @@ const ProtectedRoute = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
+                {}
                 <Route path="/articles" element={<Articles />} />
+                <Route path="/articles/listearticles" element={<Articles />} />
                 <Route path="/articles/newarticleai" element={<NewArticleAI />} />
                 <Route path="/articles/newarticle" element={<NewArticle />} />
                 <Route path="/articles/editarticle/:id" element={<EditArticle />} />
                 <Route path="/settings" element={<Settings />} />
+                {/*<Route path="/settings/paramsblog" element={<SettingsBlog />} />
+                <Route path="/settings/paramsavis" element={<SettingsAvis />} />
+                <Route path="/settings/arborescence" element={<SettingsArbo />} />*/}
                 <Route path="/statistics" element={<Statistics />} />
                 <Route path="/site" element={<Site />} />
                 <Route path="/step2" element={<Step2 />} />
