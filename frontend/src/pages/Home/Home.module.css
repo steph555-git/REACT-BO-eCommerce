@@ -1,3 +1,8 @@
+.home, .navbar .dropdown-menu{
+    background-color:#d8d8d8;
+    font-size: 15px;
+}
+
 h1{
     color:rgb(170, 170, 170);
     font-size:40px;
