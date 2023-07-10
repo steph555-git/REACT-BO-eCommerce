@@ -5,7 +5,8 @@ import Home from '../../pages/Home/Home'
 import Articles from '../../pages/Articles/Articles';
 import NewArticleAI from '../../pages/NewArticleAI/NewArticleAI';
 import NewArticle from '../../pages/NewArticle/NewArticle';
-import EditArticle from '../../pages/EditArticles/EditArticles'
+import EditArticle from '../../pages/Edit/EditArticles'
+import EditLead from '../../pages/Edit/EditLead';
 import Settings from '../../pages/Settings/Settings'
 import Statistics from '../../pages/Statistics/Statistics'
 import Site from '../../pages/Site/Site'
@@ -25,7 +26,8 @@ const ProtectedRoute = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
-                {}
+                <Route path="/home/listeleads" element={<Home />} />
+                <Route path="/home/lead/:id" element={<EditLead />} />
                 <Route path="/articles" element={<Articles />} />
                 <Route path="/articles/listearticles" element={<Articles />} />
                 <Route path="/articles/newarticleai" element={<NewArticleAI />} />

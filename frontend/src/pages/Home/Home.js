@@ -1,31 +1,44 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid'
-
+import { changeDateformat } from '../../utils/changeDateFormat'
+import { fetchBackendDataBase } from '../../utils/fetchBackendDataBase'
 
 import styles from './Home.module.css'
 
-const rows = [
-    { id: 1, category: 'Hello', image: 'World' },
-    { id: 2, category: 'DataGridPro', image: 'is Awesome' },
-    { id: 3, category: 'MUI', image: 'is Amazing' },
-    { id: 4, category: 'MUI', image: 'is Amazing' },
-];
-
 const columns = [
-    { field: 'id', headerName: 'ID', headerClassName: 'super-app-theme--header', flex: 100 },
-    { field: 'date', headerName: 'DATE', headerClassName: 'super-app-theme--header', flex: 150 },
-    { field: 'lastname', headerName: 'LAST NAME', headerClassName: 'super-app-theme--header', flex: 150 },
-    { field: 'firstname', headerName: 'FIRST NAME', headerClassName: 'super-app-theme--header', flex: 150 },
-    { field: 'email', headerName: 'EMAIL', headerClassName: 'super-app-theme--header', flex: 200 },
-    { field: 'telephone', headerName: 'TELEPHONE', headerClassName: 'super-app-theme--header', flex: 150 },
-    { field: 'view', headerName: 'VIEW', headerClassName: 'super-app-theme--header', flex: 50 },
+    { field: 'id', headerName: '#REQUEST', headerClassName: styles.superAppThemeHeader, flex: 100 },
+    { field: 'DATE', headerName: 'DATE', headerClassName: styles.superAppThemeHeader, flex: 150 },
+    { field: 'LASTNAME', headerName: 'LAST NAME', headerClassName: styles.superAppThemeHeader, flex: 150 },
+    { field: 'FIRSTNAME', headerName: 'FIRST NAME', headerClassName: styles.superAppThemeHeader, flex: 150 },
+    { field: 'EMAIL', headerName: 'EMAIL', headerClassName: styles.superAppThemeHeader, flex: 200 },
+    { field: 'TELEPHONE', headerName: 'TELEPHONE', headerClassName: styles.superAppThemeHeader, flex: 150 },
 ]
 
 const Home = () => {
     const [rowSelectionModel, setRowSelectionModel] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [rows, setRows] = useState([])
     const navigate = useNavigate()
+
+    useEffect(() => {
+        const fetchLeadsData = async () => {
+            try {
+                setIsLoading(true)
+                const jsonData = await fetchBackendDataBase('getallleads')
+                changeDateformat(jsonData)
+                setRows(jsonData)
+
+                setIsLoading(false)
+
+            } catch (error) {
+                console.error('Erreur lors de la récupération des données :', error);
+                setIsLoading(false)
+            }
+        };
+        fetchLeadsData();
+    }, [])
 
     const handleSelectionModel = (newRowSelectionModel) => {
         setRowSelectionModel(newRowSelectionModel)
@@ -34,31 +47,41 @@ const Home = () => {
     const handleDoubleClick = (params) => {
         const selectedRow = rows.find(row => row.id === params.id);
         if (selectedRow) {
-            navigate(`/leadedit/${selectedRow.id}`)
+            navigate(`/home/lead/${selectedRow.id}`)
         }
     }
     return (
         <>
             <h1>Liste des leads</h1>
-            <Box
-                sx={{
-                    height: 500,
-                    '& .super-app-theme--header': {
-                        backgroundColor: 'rgb(79, 79, 79)',
-                        color: 'white',
-                    },
-                }}>{/**list item en mobile */}
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    slots={{ toolbar: GridToolbar }}
-                    checkboxSelection
-                    onRowSelectionModelChange={handleSelectionModel}
-                    onRowDoubleClick={handleDoubleClick}
-                />
-            </Box>
+            {isLoading ? (
+                <p>Chargement en cours...</p>
+            ) : rows && rows.length > 0 ? (
+                <Box>
+                    {/**list item en mobile */}
+                    <DataGrid
+                        initialState={{
+                            sorting: {
+                                sortModel: [{ field: 'id', sort: 'desc' }],
+                            },
+                        }}
+                        rowHeight={40}
+                        rows={rows}
+                        columns={columns}
+                        slots={{
+                            toolbar: GridToolbar
+                        }}
+                        checkboxSelection
+                        onRowSelectionModelChange={handleSelectionModel}
+                        onRowDoubleClick={handleDoubleClick}
+                    />
+                </Box>
+            ) : (
+                <p>Aucune donnée disponible.</p>
+            )}
         </>
     )
 }
 
 export default Home
+
+

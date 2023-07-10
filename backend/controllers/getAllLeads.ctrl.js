@@ -2,7 +2,7 @@ const db = require('../app')
 
 const getAllLeadsCTRL = async (req, res) => {
     try {
-        const query = `SELECT * FROM "BO_Schema"."TB_LEADS" ORDER BY "ID" ASC`
+        const query = `SELECT * FROM "BO_Schema"."TB_LEADS" ORDER BY "id" ASC`
         const result = await db.query(query)
         console.log('Query sent')
         return res.status(200).send(result.rows)
