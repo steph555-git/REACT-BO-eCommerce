@@ -1,19 +1,31 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
+import { Box, Chip } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { changeDateformat } from '../../utils/changeDateFormat'
-import { fetchBackendDataBase } from '../../utils/fetchBackendDataBase'
+import { getFetchBackendDataBase } from '../../utils/fetchBackendDataBase'
 
 import styles from './Home.module.css'
 
 const columns = [
     { field: 'id', headerName: '#REQUEST', headerClassName: styles.superAppThemeHeader, flex: 100 },
-    { field: 'DATE', headerName: 'DATE', headerClassName: styles.superAppThemeHeader, flex: 150 },
+    { field: 'DATECREA', headerName: 'DATE', headerClassName: styles.superAppThemeHeader, flex: 150 },
     { field: 'LASTNAME', headerName: 'LAST NAME', headerClassName: styles.superAppThemeHeader, flex: 150 },
     { field: 'FIRSTNAME', headerName: 'FIRST NAME', headerClassName: styles.superAppThemeHeader, flex: 150 },
     { field: 'EMAIL', headerName: 'EMAIL', headerClassName: styles.superAppThemeHeader, flex: 200 },
     { field: 'TELEPHONE', headerName: 'TELEPHONE', headerClassName: styles.superAppThemeHeader, flex: 150 },
+    {
+        field: 'STATUS', headerName: 'STATUS', headerClassName: styles.superAppThemeHeader, flex: 150, renderCell: (params) => {
+            if (params.value === 'Nouveau') {
+                return <Chip label="Nouveau" size="small" color="primary" variant="outlined" />;
+            } else if (params.value === 'En cours') {
+                return <Chip label="En cours" size="small" color="warning" variant="outlined" />;
+            } else if (params.value === 'Traité') {
+                return <Chip label="Traité" size="small" color="success" variant="outlined" />;
+            }
+            return '';
+        },
+    },
 ]
 
 const Home = () => {
@@ -26,9 +38,10 @@ const Home = () => {
         const fetchLeadsData = async () => {
             try {
                 setIsLoading(true)
-                const jsonData = await fetchBackendDataBase('getallleads')
-                changeDateformat(jsonData)
-                setRows(jsonData)
+                const jsonData = await getFetchBackendDataBase('getallleads')
+                const newJsonData = changeDateformat(jsonData)
+
+                setRows(newJsonData)
 
                 setIsLoading(false)
 
@@ -46,6 +59,7 @@ const Home = () => {
 
     const handleDoubleClick = (params) => {
         const selectedRow = rows.find(row => row.id === params.id);
+
         if (selectedRow) {
             navigate(`/home/lead/${selectedRow.id}`)
         }
@@ -57,8 +71,9 @@ const Home = () => {
                 <p>Chargement en cours...</p>
             ) : rows && rows.length > 0 ? (
                 <Box>
-                    {/**list item en mobile */}
+                    {/**Basculer en 'List item'  version en mobile */}
                     <DataGrid
+                        sx={{ backgroundColor: 'white' }}
                         initialState={{
                             sorting: {
                                 sortModel: [{ field: 'id', sort: 'desc' }],
@@ -76,7 +91,7 @@ const Home = () => {
                     />
                 </Box>
             ) : (
-                <p>Aucune donnée disponible.</p>
+                <p>Aucune donnée disponible. Contactez votre administrateur</p>
             )}
         </>
     )

@@ -5,7 +5,13 @@ h1{
 }
 
 .superAppThemeHeader{
-    background-color: rgba(79, 79, 79);
+    background-color: rgb(104, 104, 104);
     color:rgb(255, 255, 255);
     font-size: 12px;
+} 
+.blackFontColor{
+
+}
+.greenFontColor{
+    color:green;
 }

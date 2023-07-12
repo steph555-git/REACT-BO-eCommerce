@@ -3,9 +3,12 @@ import moment from 'moment'
 export const changeDateformat = (jsonData) => {
     for (let i = 0; i < jsonData.length; i++) {
         const obj = jsonData[i]
-        const originalDate = obj.DATE
-        const formattedDate = moment(originalDate).format('DD/MM/YY - HH:mm')
-        obj.DATE = formattedDate;
+        const originalDateCrea = obj.DATECREA
+        const originalDateModif = obj.DATEMODIF
+        const formattedDateCrea = moment(originalDateCrea).format('DD/MM/YY - HH:mm')
+        const formattedDateModif = moment(originalDateModif).format('DD/MM/YY - HH:mm')
+        obj.DATECREA = formattedDateCrea;
+        obj.DATEMODIF = formattedDateModif
     }
     return jsonData
 }

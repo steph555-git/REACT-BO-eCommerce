@@ -50,6 +50,7 @@ const ListArticles = () => {
                 },
             }}>{/**list item en mobile */}
             <DataGrid
+                sx={{ backgroundColor: 'white' }}
                 rows={rows}
                 columns={columns}
                 slots={{ toolbar: GridToolbar }}

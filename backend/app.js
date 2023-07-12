@@ -9,6 +9,7 @@ const dbConnection = require('./database/db-postgres')
 const db = dbConnection
 module.exports = db
 
+app.use(express.json())
 app.use(cors({
   origin: 'http://localhost:3000'
 }))
