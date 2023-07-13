@@ -11,6 +11,7 @@ import Settings from '../../pages/Settings/Settings'
 import Statistics from '../../pages/Statistics/Statistics'
 import Site from '../../pages/Site/Site'
 import Step2 from '../../pages/NewArticleAI/Step2';
+import ListLeadArchived from '../../pages/Lists/ListLeadArchived';
 
 import Layout from '../Layout/Layout'
 import { UserAuth } from '../../context/AuthContext'
@@ -27,6 +28,7 @@ const ProtectedRoute = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/home/listeleads" element={<Home />} />
+                <Route path="/home/archived" element={< ListLeadArchived />} />
                 <Route path="/home/lead/:id" element={<EditLead />} />
                 <Route path="/articles" element={<Articles />} />
                 <Route path="/articles/listearticles" element={<Articles />} />

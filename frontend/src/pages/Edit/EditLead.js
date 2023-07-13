@@ -78,7 +78,7 @@ const EditLead = () => {
 
             <Grid container spacing={2}>
                 <Grid item xs={12} md={5}>
-                    <Card sx={{ minWidth: 275 }}>
+                    <Card sx={{ minWidth: 275, height: 500 }}>
                         <CardContent>
                             <div className={styles.cardHeader} >
                                 <Typography sx={{ fontSize: 30 }} variant="h2" component="div">
@@ -125,22 +125,32 @@ const EditLead = () => {
                     </Card>
                 </Grid>
                 <Grid item xs={12} md={7}>
-                    <Card sx={{ minWidth: 275, height: 555 }}>
+                    <Card sx={{ minWidth: 275, height: 500 }}>
                         <CardContent>
                             <Typography sx={{ fontSize: 30 }} variant="h2" component="div">
                                 Message complet :
-                            </Typography>
+                            </Typography><br></br>
                             <Typography sx={{ mb: 1.5 }} color="text.secondary">
                                 Objet : {dataFetched.OBJET}
                             </Typography>
-                            <Typography variant="body2">
+                            <Typography variant="body1">
                                 {dataFetched.REQUEST}
+
+                            </Typography><br />
+                            <Typography variant="body2">
+                                <TextField
+                                    multiline
+                                    name="NOTE"
+                                    sx={{ width: '100%' }}
+                                    rows={4}
+                                    label="Note personnelle"
+                                    value={dataFetched.NOTE || ''}
+                                    onChange={handleChange}
+                                    variant="standard"
+                                />
                                 <br />
                             </Typography>
                         </CardContent>
-                        <CardActions>
-                            <Button size="small">Learn More</Button>
-                        </CardActions>
                     </Card>
                 </Grid>
 

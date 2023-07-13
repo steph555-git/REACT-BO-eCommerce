@@ -18,8 +18,10 @@ const updateLeadCTRL = async (req, res) => {
         "TELEPHONE" = $5,
         "DATEMODIF" = $6,
         "STATUS" = $7,
-        "OBJET" = $8 
-      WHERE id = $9;`
+        "OBJET" = $8,
+        "ARCHIVE" = $9,
+        "NOTE" = $10
+      WHERE id = $11;`
         const result = await db.query(queryUpdateLead, [
             newData.FIRSTNAME,
             newData.LASTNAME,
@@ -29,6 +31,8 @@ const updateLeadCTRL = async (req, res) => {
             newData.DATEMODIF,
             newData.STATUS,
             newData.OBJET,
+            newData.ARCHIVE,
+            newData.NOTE,
             id
         ])
         return res.status(200).send('Lead updated successfully!')
