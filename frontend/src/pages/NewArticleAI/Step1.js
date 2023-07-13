@@ -46,6 +46,7 @@ const Step1 = ({ etapeActive }) => {
                 <Grid item xs={12} md={6} >
                     <Grid container direction="column">
                         <Autocomplete
+                            sx={{ backgroundColor: 'white' }}
                             disablePortal
                             value={ROLE1}
                             onChange={(event, newValue) => {
@@ -60,6 +61,7 @@ const Step1 = ({ etapeActive }) => {
                                     helperText="Saisir un premier rôle pour rédiger votre article" />}
                         /><br />
                         <Autocomplete
+                            sx={{ backgroundColor: 'white' }}
                             disablePortal
                             value={ROLE2}
                             onChange={(event, newValue) => {
@@ -74,6 +76,7 @@ const Step1 = ({ etapeActive }) => {
                                     helperText="Saisir un deuxième rôle pour rédiger votre article" />}
                         /><br /><br />
                         <TextField
+                        sx={{ backgroundColor: 'white' }}
                             id="outlined-1"
                             value={SUJET}
                             onChange={(event) => {
@@ -85,6 +88,7 @@ const Step1 = ({ etapeActive }) => {
                             helperText="Sujet de votre article, idealement sous forme de question."
                         /><br />
                         <TextField
+                        sx={{ backgroundColor: 'white' }}
                             id="outlined-2"
                             value={MOTS}
                             onChange={(event) => {

@@ -9,9 +9,10 @@ h1{
     color:rgb(255, 255, 255);
     font-size: 12px;
 } 
-.blackFontColor{
 
-}
-.greenFontColor{
-    color:green;
+.haut{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+   
 }

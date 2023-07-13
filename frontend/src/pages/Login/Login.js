@@ -54,6 +54,7 @@ const Login = () => {
                     component="form"
                     onSubmit={handleSubmit}
                     sx={{
+                        backgroundColor: 'white',
                         display: 'flex',
                         justifyContent: 'center',
                         flexDirection: 'column',

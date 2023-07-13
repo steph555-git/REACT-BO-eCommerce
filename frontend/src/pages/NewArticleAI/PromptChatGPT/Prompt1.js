@@ -51,14 +51,14 @@ const Prompt1 = ({ setVisibleNextStep, setErrorState }) => {
                 label="Premier prompt"
                 multiline
                 rows={6}
-                sx={{ width: '100%' }}
+                sx={{ width: '100%', backgroundColor: 'white' }}
             /><br /><br />
             <Button variant="outlined" size="large" sx={{ width: '100%' }} onClick={Submit2GPT}>
                 Soumettre à ChatGPT
             </Button>
             <br /><br />
             <TextField
-                sx={{ width: '100%' }}
+                sx={{ width: '100%', backgroundColor: 'white' }}
                 disabled
                 id="outlined-multiline-static2"
                 label="Réponse de ChatGPT"
