@@ -10,7 +10,14 @@ import styles from './Home.module.css'
 
 const columns = [
     { field: 'id', headerName: '#REQUEST', headerClassName: styles.superAppThemeHeader, flex: 100 },
-    { field: 'ARCHIVE', headerName: 'ARCHIVE', headerClassName: styles.superAppThemeHeader, flex: 150 },
+    {
+        field: 'ARCHIVE', headerName: 'ARCHIVE', headerClassName: styles.superAppThemeHeader, flex: 150, renderCell: (params) => {
+            if (params.value === false) {
+                return <ArchiveOutlinedIcon color='warning'/>;
+            }
+            return '';
+        },
+    },
     { field: 'DATECREA', headerName: 'DATE', headerClassName: styles.superAppThemeHeader, flex: 150 },
     { field: 'LASTNAME', headerName: 'LAST NAME', headerClassName: styles.superAppThemeHeader, flex: 150 },
     { field: 'FIRSTNAME', headerName: 'FIRST NAME', headerClassName: styles.superAppThemeHeader, flex: 150 },
