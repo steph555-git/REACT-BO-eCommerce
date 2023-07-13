@@ -32,7 +32,7 @@ const Home = () => {
     const [rowSelectionModel, setRowSelectionModel] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [rows, setRows] = useState([])
-    const [countLead, setCountLead] = useState(0)
+
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -43,8 +43,6 @@ const Home = () => {
                 const newJsonData = changeDateformat(jsonData)
 
                 setRows(newJsonData)
-                setCountLead(rows.length)
-
                 setIsLoading(false)
 
             } catch (error) {
@@ -66,9 +64,10 @@ const Home = () => {
             navigate(`/home/lead/${selectedRow.id}`)
         }
     }
+    const nbLeads = rows?.length || '0'
     return (
         <>
-            <section className={styles.haut}><h1>Liste des leads</h1> <p>{countLead} leads</p></section>
+            <section className={styles.haut}><h1>Liste des leads</h1> <p>{nbLeads} leads</p></section>
             {isLoading ? (
                 <p>Chargement en cours...</p>
             ) : rows && rows.length > 0 ? (

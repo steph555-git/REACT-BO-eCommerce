@@ -1,0 +1,10 @@
+.dateCreaModif {
+    color:rgb(185, 185, 185);
+    font-size: small;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
