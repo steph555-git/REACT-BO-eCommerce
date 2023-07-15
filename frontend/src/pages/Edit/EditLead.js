@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 
 import { Grid, Card, Button, Switch } from '@mui/material';
 import { Typography, CardActions, CardContent } from '@mui/material';
-import { Box, TextField, Autocomplete } from '@mui/material';
+import { Box, TextField, Autocomplete, Snackbar, Alert } from '@mui/material';
 
 import { getFetchBackendDataBase, putFetchBackendDataBase } from '../../utils/fetchBackendDataBase'
 import { changeDateformat } from '../../utils/changeDateFormat'
@@ -14,6 +14,11 @@ const EditLead = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [dataTitle, setDataTitle] = useState([['Nom', 'LASTNAME'], ['Prénom', 'FIRSTNAME'], ['Téléphone', 'TELEPHONE'], ['Email', 'EMAIL']])
     const [dataFetched, setDataFetched] = useState({ ARCHIVE: false, STATUS: '' })
+    const [open, setOpen] = useState(false)
+    const [stateSave, setStateSave] = useState({
+        severity: '',
+        message: ''
+    })
 
     const params = useParams()
     const status = ['Nouveau', 'En cours', 'Traité']
@@ -22,7 +27,7 @@ const EditLead = () => {
         const fetchLeadsData = async () => {
             try {
                 setIsLoading(true)
-                const jsonData = await getFetchBackendDataBase('getlead', params.id)
+                const jsonData = await getFetchBackendDataBase('lead', params.id)
                 const newJsonData = changeDateformat(jsonData)
                 console.log(newJsonData[0])
 
@@ -41,16 +46,26 @@ const EditLead = () => {
     const updateDataLead = async () => {
         try {
             const updatedData = { ...dataFetched };
-            await putFetchBackendDataBase('updatelead', params.id, updatedData);
-            console.log('Statut mis à jour avec succès !');
+            const response = await putFetchBackendDataBase('lead', params.id, updatedData);
+            response ?
+                setStateSave({ severity: 'success', message: 'Lead updated successfully !' })
+                :
+                setStateSave({ severity: 'error', message: 'Error occurred while updating lead' })
+            setOpen(true)
         } catch (error) {
             console.error('Erreur lors de la mise à jour du statut :', error);
         }
     }
 
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    }
+
     const handleChange = (e) => {
         const { name, value } = e.target;
-        console.log(name, value)
 
         if (name === "ARCHIVE") {
             setDataFetched((prevState) => ({
@@ -66,12 +81,13 @@ const EditLead = () => {
         console.log(dataFetched)
     }
     const handleChange2 = (name, value) => {
-        console.log(name, value)
+
         setDataFetched((prevState) => ({
             ...prevState,
             [name]: value,
         }));
     }
+
     return (
         <>
             <h1>Lead N°{dataFetched.id}</h1>
@@ -121,6 +137,11 @@ const EditLead = () => {
                         </CardContent>
                         <CardActions>
                             <Button size="small" onClick={updateDataLead}>Enregistrer</Button>
+                            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                                <Alert onClose={handleClose} severity={stateSave.severity} sx={{ width: '100%' }}>
+                                    {stateSave.message}
+                                </Alert>
+                            </Snackbar>
                         </CardActions>
                     </Card>
                 </Grid>
@@ -137,7 +158,7 @@ const EditLead = () => {
                                 {dataFetched.REQUEST}
 
                             </Typography><br />
-                            <Typography variant="body2">
+                            <div variant="body1">
                                 <TextField
                                     multiline
                                     name="NOTE"
@@ -149,7 +170,7 @@ const EditLead = () => {
                                     variant="standard"
                                 />
                                 <br />
-                            </Typography>
+                            </div>
                         </CardContent>
                     </Card>
                 </Grid>

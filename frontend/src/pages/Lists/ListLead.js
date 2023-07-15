@@ -39,7 +39,7 @@ const ListLead = () => {
         const fetchLeadsData = async () => {
             try {
                 setIsLoading(true)
-                const jsonData = await getFetchBackendDataBase('getallleads')
+                const jsonData = await getFetchBackendDataBase('lead')
                 const newJsonData = changeDateformat(jsonData)
 
                 setRows(newJsonData)

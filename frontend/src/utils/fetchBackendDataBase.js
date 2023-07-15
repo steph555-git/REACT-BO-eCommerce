@@ -1,6 +1,9 @@
-export const getFetchBackendDataBase = async (slug, id) => {
+export const getFetchBackendDataBase = async (slug, id, archive = false) => {
+
     try {
-        const url = id ? `http://localhost:4000/${slug}/${id}` : `http://localhost:4000/${slug}`
+        let url = id ? `http://localhost:4000/${slug}/${id}` : `http://localhost:4000/${slug}`
+        archive && (url += "?archive=true")
+
         const response = await fetch(url)
         const jsonData = await response.json();
         return jsonData
@@ -21,8 +24,10 @@ export const putFetchBackendDataBase = async (slug, id, newData) => {
 
         if (response.ok) {
             console.log('Data update successfull !');
+            return response.ok
         } else {
             console.error('Data update Error :', response.statusText);
+            return response.ok
         }
     } catch (error) {
         console.error('Request error :', error);

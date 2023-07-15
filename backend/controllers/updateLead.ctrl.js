@@ -22,7 +22,7 @@ const updateLeadCTRL = async (req, res) => {
         "ARCHIVE" = $9,
         "NOTE" = $10
       WHERE id = $11;`
-        const result = await db.query(queryUpdateLead, [
+        await db.query(queryUpdateLead, [
             newData.FIRSTNAME,
             newData.LASTNAME,
             newData.EMAIL,

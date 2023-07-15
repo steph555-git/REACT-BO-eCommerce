@@ -12,8 +12,8 @@ const columns = [
     { field: 'id', headerName: '#REQUEST', headerClassName: styles.superAppThemeHeader, flex: 100 },
     {
         field: 'ARCHIVE', headerName: 'ARCHIVE', headerClassName: styles.superAppThemeHeader, flex: 150, renderCell: (params) => {
-            if (params.value === false) {
-                return <ArchiveOutlinedIcon color='warning'/>;
+            if (params.value === true) {
+                return <ArchiveOutlinedIcon color='warning' />;
             }
             return '';
         },
@@ -48,7 +48,7 @@ const ListLeadArchived = () => {
         const fetchLeadsData = async () => {
             try {
                 setIsLoading(true)
-                const jsonData = await getFetchBackendDataBase('getallleads')
+                const jsonData = await getFetchBackendDataBase('lead', false, true)
                 const newJsonData = changeDateformat(jsonData)
 
                 setRows(newJsonData)
@@ -101,7 +101,7 @@ const ListLeadArchived = () => {
                     />
                 </Box>
             ) : (
-                <p>Aucune donnée disponible. Contactez votre administrateur</p>
+                <p>Aucune lead archivé.</p>
             )}
         </>
     )
