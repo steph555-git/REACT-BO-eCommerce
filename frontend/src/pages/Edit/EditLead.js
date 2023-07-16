@@ -137,7 +137,7 @@ const EditLead = () => {
                         </CardContent>
                         <CardActions>
                             <Button size="small" onClick={updateDataLead}>Enregistrer</Button>
-                            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                            <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={open} autoHideDuration={5000} onClose={handleClose}>
                                 <Alert onClose={handleClose} severity={stateSave.severity} sx={{ width: '100%' }}>
                                     {stateSave.message}
                                 </Alert>
@@ -175,7 +175,7 @@ const EditLead = () => {
                     </Card>
                 </Grid>
 
-            </Grid>
+            </Grid >
             <br></br>
 
         </>
