@@ -7,6 +7,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { ThemeProvider, createTheme } from '@mui/material/styles'
+
 import { UserAuth } from '../../context/AuthContext'
 
 import SubNav from './SubNav'
@@ -14,12 +15,14 @@ import SubNav from './SubNav'
 const pages = ['home', 'articles', 'settings', 'statistics', 'site'];
 
 const Nav = () => {
+
     const { logOut } = UserAuth()
     const navigate = useNavigate()
     const location = useLocation()
 
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [dataToSubNav, setDataToSubNav] = useState([])
+    const [activeButton, setActiveButton] = useState(null)
 
     const navPathName = location.pathname.slice(1)
     const categoryName = navPathName.split('/')[0]
@@ -180,7 +183,35 @@ const Nav = () => {
                                         key={page}
                                         component={Link}
                                         to={`/${page.toLowerCase()}`}
-                                        sx={{ my: 2, mx: 2, textAlign: 'center', color: 'white', display: 'block' }}
+                                        sx={{
+                                            my: 2,
+                                            mx: 2,
+                                            textAlign: 'center',
+                                            color: 'white',
+                                            fontSize: 15,
+                                            display: 'block',
+                                            position: 'relative',
+                                            borderRadius: 0,
+                                            height: 35,
+                                            transition: 'background-color 0.3s ease-in-out',
+                                            '&::before': {
+                                                content: "''",
+                                                position: 'absolute',
+                                                bottom: 0,
+                                                left: 0,
+                                                width: '100%',
+                                                height: '2px',
+                                                borderBottom: '3px solid transparent',
+                                                transition: 'border-color 0.3s ease-in-out',
+                                                borderBottomColor: activeButton === page ? 'blue' : 'transparent',
+                                            },
+                                            '&:hover': {
+                                                '&::before': {
+                                                    borderBottomColor: activeButton === page ? 'blue' : 'transparent',
+                                                },
+                                            },
+                                        }}
+                                        onClick={() => setActiveButton(page)}
                                     >
                                         {index === 0 ? (
                                             <Badge badgeContent={3} color="error" >

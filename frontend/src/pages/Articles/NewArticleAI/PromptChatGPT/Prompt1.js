@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { TextField, Button, } from '@mui/material';
 
-import { getRole1, getRole2, getSujet, getMots } from '../../../redux/slices/step1.slice'
-import { setFirstPrompt, getFirstPrompt } from '../../../redux/slices/stepsGenerateArticleAI.slice'
+import { getRole1, getRole2, getSujet, getMots } from '../../../../redux/slices/step1.slice'
+import { setFirstPrompt, getFirstPrompt } from '../../../../redux/slices/stepsGenerateArticleAI.slice'
 import { useSelector, useDispatch } from 'react-redux'
 
 

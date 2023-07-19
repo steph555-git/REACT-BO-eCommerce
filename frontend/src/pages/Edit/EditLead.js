@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { Grid, Card, Button, Switch } from '@mui/material';
+import { Grid, Card, Button, Switch, FormHelperText, FormControlLabel, FormControl } from '@mui/material';
 import { Typography, CardActions, CardContent } from '@mui/material';
 import { Box, TextField, Autocomplete, Snackbar, Alert } from '@mui/material';
 
@@ -100,12 +100,18 @@ const EditLead = () => {
                                 <Typography sx={{ fontSize: 30 }} variant="h2" component="div">
                                     Coordonnées :
                                 </Typography>
-                                <Switch
-                                    name="ARCHIVE"
-                                    color="error"
-                                    checked={dataFetched.ARCHIVE}
-                                    onChange={handleChange}
-                                />
+                                <FormControl component="fieldset" variant="standard">
+                                    <FormControlLabel
+                                        control={
+                                            <Switch
+                                                name="ARCHIVE"
+                                                color="error"
+                                                checked={dataFetched.ARCHIVE}
+                                                onChange={handleChange}
+                                            />}
+                                    />
+                                    <FormHelperText>Archiver</FormHelperText>
+                                </FormControl>
                             </div>
                             <Box component="form" sx={{
                                 '& .MuiTextField-root': { m: 1, width: '25ch' },

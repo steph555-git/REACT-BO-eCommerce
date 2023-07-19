@@ -7,8 +7,8 @@ import SendIcon from '@mui/icons-material/Send'
 import StepperCompo from './StepperCompo';
 import Prompt1 from './PromptChatGPT/Prompt1'
 
-import { getRole1, getRole2, getSujet, getMots } from '../../redux/slices/step1.slice'
-import { setRole1, setRole2, setSujet, setMots } from '../../redux/slices/step1.slice'
+import { getRole1, getRole2, getSujet, getMots } from '../../../redux/slices/step1.slice'
+import { setRole1, setRole2, setSujet, setMots } from '../../../redux/slices/step1.slice'
 import { useSelector, useDispatch } from 'react-redux'
 
 const Step1 = ({ etapeActive }) => {
@@ -76,7 +76,7 @@ const Step1 = ({ etapeActive }) => {
                                     helperText="Saisir un deuxième rôle pour rédiger votre article" />}
                         /><br /><br />
                         <TextField
-                        sx={{ backgroundColor: 'white' }}
+                            sx={{ backgroundColor: 'white' }}
                             id="outlined-1"
                             value={SUJET}
                             onChange={(event) => {
@@ -88,7 +88,7 @@ const Step1 = ({ etapeActive }) => {
                             helperText="Sujet de votre article, idealement sous forme de question."
                         /><br />
                         <TextField
-                        sx={{ backgroundColor: 'white' }}
+                            sx={{ backgroundColor: 'white' }}
                             id="outlined-2"
                             value={MOTS}
                             onChange={(event) => {

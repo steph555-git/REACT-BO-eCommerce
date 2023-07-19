@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { getEtapeActive } from '../../redux/slices/stepsGenerateArticleAI.slice'
+import { getEtapeActive } from '../../../redux/slices/stepsGenerateArticleAI.slice'
 import { useSelector } from 'react-redux'
 
 import Step1 from './Step1';

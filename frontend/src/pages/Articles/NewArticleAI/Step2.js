@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import StepperCompo from './StepperCompo';
+import StepperCompo from './StepperCompo'
 
 const Step2 = () => {
     const [etapeActive] = useState(1);

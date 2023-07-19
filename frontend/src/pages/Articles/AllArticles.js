@@ -2,9 +2,9 @@ import React from 'react'
 
 import ListArticles from '../../components/ListArticles/ListArticles'
 
-import classes from './Articles.module.css'
+import classes from './AllArticles.module.css'
 
-const Articles = () => {
+const AllArticles = () => {
     return (
         <>
             <h1>Articles</h1>
@@ -13,4 +13,4 @@ const Articles = () => {
     )
 }
 
-export default Articles
+export default AllArticles
