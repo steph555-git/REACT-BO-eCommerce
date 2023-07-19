@@ -55,7 +55,7 @@ const NewArticle = () => {
     const tabStyle = { color: 'white', backgroundColor: 'rgb(166, 199, 222)', fontWeight: 400 }
     const selectedTabStyle = { color: 'black', backgroundColor: 'white', fontWeight: 500 }
 
-    return (
+    return ( 
         <>
             <div className={styles.headerDiv}>
                 <div>
