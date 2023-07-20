@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { Tabs, Tab, Button } from '@mui/material';
+import { Tabs, Tab, Button, ListItemIcon, ListItemText } from '@mui/material';
 import { Box, Typography } from '@mui/material';
 
 import InfoIcon from '@mui/icons-material/Info';
@@ -26,7 +26,7 @@ const TabPanel = (props) => {
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 3 }}>
+                <Box sx={{ p: 1 }}>
                     <Typography component="div">{children}</Typography>
                 </Box>
             )}
@@ -48,14 +48,15 @@ const a11yProps = (index) => {
 const NewArticle = () => {
 
     const [value, setValue] = useState(0);
+    const [labelsSideMenu, SetLabelsSideMenu] = useState(['Informations', 'Categories', 'Seo'])
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    const tabStyle = { color: 'white', backgroundColor: 'rgb(166, 199, 222)', fontWeight: 400 }
-    const selectedTabStyle = { color: 'black', backgroundColor: 'white', fontWeight: 500 }
+    const tabStyle = { color: 'white', backgroundColor: 'rgb(166, 199, 222)', fontWeight: 400, height: '30px' }
+    const selectedTabStyle = { color: 'black', backgroundColor: 'white', fontWeight: 500, height: '30px' }
 
-    return ( 
+    return (
         <>
             <div className={styles.headerDiv}>
                 <div>
@@ -74,15 +75,20 @@ const NewArticle = () => {
                     orientation="vertical"
                     value={value}
                     onChange={handleChange}
-                    aria-label="Vertical tabs example"
-                    sx={{ borderRight: 1, borderColor: 'divider' }}
+                    aria-label="Vertical tabs"
+                    sx={{ borderRight: 1, borderColor: 'divider', width: '200px' }}
                 >
+                    {/** INFORMATIONS / CATEGORIES / SEO **/}
+                    {labelsSideMenu.map((label, index) => (
+                        <Tab key={index}
+                            iconPosition="start"
+                            icon={index === 0 ? <InfoIcon /> : index === 1 ? <AccountTreeIcon /> : index === 2 ? <AutoGraphIcon /> : null}
+                            label={label}
+                            sx={{ paddingLeft: '15px', textAlign: 'left', justifyContent: 'left' }}
+                            {...a11yProps(index)} style={value === index ? { ...tabStyle, ...selectedTabStyle } : tabStyle} />
+                    ))}
 
-
-                    <Tab label="Informations" {...a11yProps(0)} style={value === 0 ? { ...tabStyle, ...selectedTabStyle } : tabStyle} />
-                    <Tab label="Category" {...a11yProps(1)} style={value === 1 ? { ...tabStyle, ...selectedTabStyle } : tabStyle} />
-                    <Tab label="Seo" {...a11yProps(2)} style={value === 2 ? { ...tabStyle, ...selectedTabStyle } : tabStyle} />
-                </Tabs>
+                </Tabs >
 
                 <TabPanel value={value} index={0} style={{ width: '100%' }}>
                     <Informations />
@@ -93,7 +99,7 @@ const NewArticle = () => {
                 <TabPanel value={value} index={2} style={{ width: '100%' }}>
                     <Seo />
                 </TabPanel>
-            </Box>
+            </Box >
         </>
     )
 }

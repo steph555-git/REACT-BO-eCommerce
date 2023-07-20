@@ -20,12 +20,12 @@ const Informations = () => {
         }
     }
     return (
-        <>
+        <Box >
             <Box sx={{ backgroundColor: '#666967', color: 'white' }}>
                 <Typography sx={{ p: '5px' }}>General parameter</Typography>
             </Box >
 
-            <Box sx={{ backgroundColor: '#f3f3f3', color: '#666967', p: 3 }}>
+            <Box sx={{ backgroundColor: '#f3f3f3', color: '#666967', px: 4 }}>
 
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <LocalizationProvider dateAdapter={AdapterDayjs} >
@@ -36,15 +36,15 @@ const Informations = () => {
                         </DemoContainer>
                     </LocalizationProvider>
                     <Box>
-                        <FormLabel id="radio-visible" sx={{ mx: 4 }}>Visible</FormLabel>
+                        <FormLabel id="radio-visible" sx={{ mx: 4, fontSize: '0.875rem' }}>Visible</FormLabel>
                         <RadioGroup
                             row
                             aria-labelledby="demo-row-radio-buttons-group-label"
                             name="row-radio-buttons-group"
                             defaultValue="No"
                         >
-                            <FormControlLabel value="Yes" control={<Radio color="success" />} label="Yes" />
-                            <FormControlLabel value="No" control={<Radio color="error" />} label="No" />
+                            <FormControlLabel value="Yes" control={<Radio color="success" size="small" />} label={<span style={{ fontSize: '0.875rem' }}>Yes</span>} />
+                            <FormControlLabel value="No" control={<Radio color="error" size="small" />} label={<span style={{ fontSize: '0.875rem' }}>No</span>} />
                         </RadioGroup>
                     </Box>
                 </Box><br></br>
@@ -77,7 +77,7 @@ const Informations = () => {
 
             </Box >
 
-        </>
+        </Box>
     )
 }
 
