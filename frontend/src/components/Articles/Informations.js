@@ -13,11 +13,44 @@ import styles from './Articles.module.css'
 
 const Informations = () => {
     const dateDuJour = new Date().toLocaleDateString('en-EN')
-    const editorRef = useRef(null);
+    const [detailsArticle, setDetailsArticle] = useState({
+        visible: false,
+        date: '',
+        title: '',
+        author: '',
+        chapeau: '',
+        description: ''
+    })
+    const editorRef1 = useRef(null)
+    const editorRef2 = useRef(null)
+
+    const handleChangeDate = (date) => {
+        setDetailsArticle(prevState => ({ ...prevState, date: date }));
+    }
+
+    const handleChangeVisibility = (event) => {
+        const isVisible = event.target.value === "Yes";
+        setDetailsArticle(prevState => ({ ...prevState, visible: isVisible }));
+    }
+
+    const handleChangeTitle = (event) => {
+        setDetailsArticle(prevState => ({ ...prevState, title: event.target.value }));
+    }
+    const handleChangeAuthor = (event) => {
+        setDetailsArticle(prevState => ({ ...prevState, author: event.target.value }));
+    }
+
+    const handleChangeChapeau = (content) => {
+        setDetailsArticle(prevState => ({ ...prevState, chapeau: content }));
+    }
+
+    const handleChangeDescription = (content) => {
+        setDetailsArticle(prevState => ({ ...prevState, description: content }));
+    }
+
     const log = () => {
-        if (editorRef.current) {
-            console.log(editorRef.current.getContent());
-        }
+        console.log('Contenu de l\'artcile:', detailsArticle);
+
     }
     return (
         <Box >
@@ -31,7 +64,7 @@ const Informations = () => {
                     <LocalizationProvider dateAdapter={AdapterDayjs} >
                         <DemoContainer components={['DateTimePicker']} sx={{ width: '20%' }} >
                             <DemoItem label="Date" >
-                                <DatePicker defaultValue={dayjs(dateDuJour)} className={styles.basic} />
+                                <DatePicker defaultValue={dayjs(dateDuJour)} className={styles.basic} onChange={handleChangeDate} />
                             </DemoItem>
                         </DemoContainer>
                     </LocalizationProvider>
@@ -42,6 +75,7 @@ const Informations = () => {
                             aria-labelledby="demo-row-radio-buttons-group-label"
                             name="row-radio-buttons-group"
                             defaultValue="No"
+                            onChange={handleChangeVisibility}
                         >
                             <FormControlLabel value="Yes" control={<Radio color="success" size="small" />} label={<span style={{ fontSize: '0.875rem' }}>Yes</span>} />
                             <FormControlLabel value="No" control={<Radio color="error" size="small" />} label={<span style={{ fontSize: '0.875rem' }}>No</span>} />
@@ -49,15 +83,39 @@ const Informations = () => {
                     </Box>
                 </Box><br></br>
 
-                <TextField sx={{ mb: 2 }} className={styles.basic} size="small" label="Title" variant="outlined" />
-                <TextField sx={{ mb: 4 }} className={styles.basic} size="small" label="Author" variant="outlined" />
-                <TextField sx={{ mb: 4 }} className={styles.basic} size="small" label="Chapeau" variant="outlined" />
-                {/*<TextField className={styles.basic} size="small" label="Description" variant="outlined" />*/}
+                <TextField sx={{ mb: 2 }} className={styles.basic} size="small" label="Title" variant="outlined" onChange={handleChangeTitle} />
+                <TextField sx={{ mb: 4 }} className={styles.basic} size="small" label="Author" variant="outlined" onChange={handleChangeAuthor} />
+
+                <FormLabel  >Chapeau :</FormLabel>
+                <Editor
+                    apiKey={process.env.REACT_APP_TINY_API_KEY}
+                    onInit={(evt, editor) => {
+                        editorRef1.current = editor;
+                    }}
+                    initialValue=""
+                    init={{
+                        height: 200,
+                        menubar: false,
+                        plugins: [
+                            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen', 'emoticons',
+                            'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                        ],
+                        toolbar: 'undo redo | blocks | ' +
+                            'bold italic forecolor | alignleft aligncenter ' +
+                            'alignright alignjustify | bullist numlist outdent indent | ' +
+                            'removeformat | help | emoticons',
+                        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+                    }}
+                    onEditorChange={handleChangeChapeau}
+                /><br></br>
                 <FormLabel  >Description :</FormLabel>
                 <Editor
                     apiKey={process.env.REACT_APP_TINY_API_KEY}
-                    onInit={(evt, editor) => editorRef.current = editor}
-                    initialValue="<p>This is the initial content of the editor.</p>"
+                    onInit={(evt, editor) => {
+                        editorRef2.current = editor;
+                    }}
+                    initialValue=""
                     init={{
                         height: 500,
                         menubar: false,
@@ -72,6 +130,7 @@ const Informations = () => {
                             'removeformat | help | emoticons',
                         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
                     }}
+                    onEditorChange={handleChangeDescription}
                 />
                 <button onClick={log}>Log editor content</button>
 

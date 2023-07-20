@@ -53,8 +53,8 @@ const NewArticle = () => {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    const tabStyle = { color: 'white', backgroundColor: 'rgb(166, 199, 222)', fontWeight: 400, height: '30px' }
-    const selectedTabStyle = { color: 'black', backgroundColor: 'white', fontWeight: 500, height: '30px' }
+    const tabStyle = { color: 'white', backgroundColor: 'rgb(166, 199, 222)', fontWeight: 400 }
+    const selectedTabStyle = { color: 'black', backgroundColor: 'white', fontWeight: 500 }
 
     return (
         <>
