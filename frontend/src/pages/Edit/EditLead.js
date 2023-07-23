@@ -97,7 +97,7 @@ const EditLead = () => {
                     <Card sx={{ minWidth: 275, height: 500 }}>
                         <CardContent>
                             <div className={styles.cardHeader} >
-                                <Typography sx={{ fontSize: 30 }} variant="h2" component="div">
+                                <Typography sx={{ fontSize: 25 }} variant="h2" component="div">
                                     Coordonnées :
                                 </Typography>
                                 <FormControl component="fieldset" variant="standard">
@@ -154,7 +154,7 @@ const EditLead = () => {
                 <Grid item xs={12} md={7}>
                     <Card sx={{ minWidth: 275, height: 500 }}>
                         <CardContent>
-                            <Typography sx={{ fontSize: 30 }} variant="h2" component="div">
+                            <Typography sx={{ fontSize: 25 }} variant="h2" component="div">
                                 Message complet :
                             </Typography><br></br>
                             <Typography sx={{ mb: 1.5 }} color="text.secondary">
