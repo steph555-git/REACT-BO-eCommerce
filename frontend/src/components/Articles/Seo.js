@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { Box, Typography, TextField } from '@mui/material'
 
+import { setSeo } from '../../redux/slices/article.slice'
+import { useDispatch } from 'react-redux'
+
 import styles from './Articles.module.css'
 
 const Seo = () => {

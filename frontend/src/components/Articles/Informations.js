@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import dayjs from 'dayjs';
 import { Box, Typography, TextField } from '@mui/material'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -9,49 +9,29 @@ import { Radio, RadioGroup, FormControlLabel, FormLabel } from '@mui/material';
 
 import { Editor } from '@tinymce/tinymce-react'
 
+import { setInformations, getInformations } from '../../redux/slices/article.slice'
+import { useSelector, useDispatch } from 'react-redux'
+
 import styles from './Articles.module.css'
 
 const Informations = () => {
-    const dateDuJour = new Date().toLocaleDateString('en-EN')
-    const [detailsArticle, setDetailsArticle] = useState({
-        visible: false,
-        date: '',
-        title: '',
-        author: '',
-        chapeau: '',
-        description: ''
-    })
+    const dispatch = useDispatch()
+    const INFORMATIONS = useSelector(getInformations)
+
     const editorRef1 = useRef(null)
     const editorRef2 = useRef(null)
 
-    const handleChangeDate = (date) => {
-        setDetailsArticle(prevState => ({ ...prevState, date: date }));
-    }
+    const dateDuJour = new Date().toLocaleDateString('en-EN')
+
+    useEffect(() => {
+        dispatch(setInformations({ ...INFORMATIONS, dateCrea: dateDuJour, visible: false }));
+    }, [])
 
     const handleChangeVisibility = (event) => {
         const isVisible = event.target.value === "Yes";
-        setDetailsArticle(prevState => ({ ...prevState, visible: isVisible }));
+        dispatch(setInformations({ ...INFORMATIONS, visible: isVisible }))
     }
 
-    const handleChangeTitle = (event) => {
-        setDetailsArticle(prevState => ({ ...prevState, title: event.target.value }));
-    }
-    const handleChangeAuthor = (event) => {
-        setDetailsArticle(prevState => ({ ...prevState, author: event.target.value }));
-    }
-
-    const handleChangeChapeau = (content) => {
-        setDetailsArticle(prevState => ({ ...prevState, chapeau: content }));
-    }
-
-    const handleChangeDescription = (content) => {
-        setDetailsArticle(prevState => ({ ...prevState, description: content }));
-    }
-
-    const log = () => {
-        console.log('Contenu de l\'artcile:', detailsArticle);
-
-    }
     return (
         <Box >
             <Box sx={{ backgroundColor: '#666967', color: 'white' }}>
@@ -64,7 +44,11 @@ const Informations = () => {
                     <LocalizationProvider dateAdapter={AdapterDayjs} >
                         <DemoContainer components={['DateTimePicker']} sx={{ width: '20%' }} >
                             <DemoItem label="Date" >
-                                <DatePicker defaultValue={dayjs(dateDuJour)} className={styles.basic} onChange={handleChangeDate} />
+                                <DatePicker
+                                    defaultValue={dayjs(dateDuJour)}
+                                    className={styles.basic}
+                                    onChange={(date) => { dispatch(setInformations({ ...INFORMATIONS, dateCrea: date.format('DD/MM/YYYY') })) }}
+                                />
                             </DemoItem>
                         </DemoContainer>
                     </LocalizationProvider>
@@ -77,14 +61,28 @@ const Informations = () => {
                             defaultValue="No"
                             onChange={handleChangeVisibility}
                         >
-                            <FormControlLabel value="Yes" control={<Radio color="success" size="small" />} label={<span style={{ fontSize: '0.875rem' }}>Yes</span>} />
-                            <FormControlLabel value="No" control={<Radio color="error" size="small" />} label={<span style={{ fontSize: '0.875rem' }}>No</span>} />
+                            <FormControlLabel value='Yes' control={<Radio color="success" size="small" />} label={<span style={{ fontSize: '0.875rem' }}>Yes</span>} />
+                            <FormControlLabel value='No' control={<Radio color="error" size="small" />} label={<span style={{ fontSize: '0.875rem' }}>No</span>} />
                         </RadioGroup>
                     </Box>
                 </Box><br></br>
 
-                <TextField sx={{ mb: 2 }} className={styles.basic} size="small" label="Title" variant="outlined" onChange={handleChangeTitle} />
-                <TextField sx={{ mb: 4 }} className={styles.basic} size="small" label="Author" variant="outlined" onChange={handleChangeAuthor} />
+                <TextField
+                    sx={{ mb: 2 }}
+                    className={styles.basic}
+                    size="small"
+                    label="Title"
+                    variant="outlined"
+                    onChange={(event) => { dispatch(setInformations({ ...INFORMATIONS, title: event.target.value })) }}
+                />
+                <TextField
+                    sx={{ mb: 4 }}
+                    className={styles.basic}
+                    size="small"
+                    label="Author"
+                    variant="outlined"
+                    onChange={(event) => { dispatch(setInformations({ ...INFORMATIONS, author: event.target.value })) }}
+                />
 
                 <FormLabel  >Chapeau :</FormLabel>
                 <Editor
@@ -107,7 +105,7 @@ const Informations = () => {
                             'removeformat | help | emoticons',
                         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
                     }}
-                    onEditorChange={handleChangeChapeau}
+                    onEditorChange={(content) => { dispatch(setInformations({ ...INFORMATIONS, chapeau: content })) }}
                 /><br></br>
                 <FormLabel  >Description :</FormLabel>
                 <Editor
@@ -130,12 +128,9 @@ const Informations = () => {
                             'removeformat | help | emoticons',
                         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
                     }}
-                    onEditorChange={handleChangeDescription}
+                    onEditorChange={(content) => { dispatch(setInformations({ ...INFORMATIONS, description: content })) }}
                 />
-                <button onClick={log}>Log editor content</button>
-
             </Box >
-
         </Box>
     )
 }
