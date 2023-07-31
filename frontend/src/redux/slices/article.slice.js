@@ -43,7 +43,7 @@ export const articleSlice = createSlice({
         setSeo: (state, action) => {
             console.log("article seo", action.payload);
             state.seo = { ...action.payload };
-        },
+        }
     },
 });
 
@@ -64,5 +64,9 @@ export const getImages = (state) => {
 export const getSeo = (state) => {
     console.log("state get SEO", state.article.seo)
     return state.article.seo
+}
+export const getNewArticle = (state) => {
+    console.log("state get SEO", state.article)
+    return state.article
 }
 export default articleSlice.reducer;

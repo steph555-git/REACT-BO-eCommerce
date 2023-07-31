@@ -4,8 +4,8 @@ import Grid from '@mui/material/Grid'
 import { Card, CardContent } from '@mui/material';
 import TreeViewCompo from './TreeViewCompo';
 
-import { setCategories } from '../../redux/slices/article.slice'
-import { useDispatch } from 'react-redux'
+import { setCategories, getCategories } from '../../redux/slices/article.slice'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Category = () => {
     const [selectedCat, setSelectedCat] = useState([])

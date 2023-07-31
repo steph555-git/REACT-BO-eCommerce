@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu } from '@mui/material';
 import { Button, MenuItem, Container, Badge } from '@mui/material';
 
@@ -18,14 +18,11 @@ const Nav = () => {
 
     const { logOut } = UserAuth()
     const navigate = useNavigate()
-    const location = useLocation()
 
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [dataToSubNav, setDataToSubNav] = useState([])
-    const [activeButton, setActiveButton] = useState(null)
 
-    const navPathName = location.pathname.slice(1)
-    const categoryName = navPathName.split('/')[0]
+    const categoryName = localStorage.getItem('page')
     let indexPage = pages.indexOf(categoryName)
 
     const handleOpenNavMenu = (event) => {
@@ -46,6 +43,7 @@ const Nav = () => {
     })
     const logout = async () => {
         try {
+            localStorage.removeItem('page')
             await logOut()
             navigate('/')
             console.log('You are logged out')
@@ -81,7 +79,7 @@ const Nav = () => {
             }
         };
         fetchData();
-    }, [categoryName, indexPage])
+    }, [indexPage])
 
     return (
         <>
@@ -95,6 +93,7 @@ const Nav = () => {
                                 noWrap
                                 component="a"
                                 href="/"
+                                onClick={() => localStorage.setItem('page', 'home')}
                                 sx={{
                                     mr: 2,
                                     display: { xs: 'none', md: 'flex' },
@@ -145,7 +144,8 @@ const Nav = () => {
                                                     style={{
                                                         color: 'white',
                                                         textDecoration: 'none',
-                                                    }}>
+                                                    }}
+                                                    onClick={() => localStorage.setItem('page', page)}>
                                                     {index === 0 ? (<Badge badgeContent={3} color="error">{page}</Badge>
                                                     ) : (page)
                                                     }
@@ -203,16 +203,15 @@ const Nav = () => {
                                                 height: '2px',
                                                 borderBottom: '3px solid transparent',
                                                 transition: 'border-color 0.3s ease-in-out',
-                                                borderBottomColor: activeButton === page ? 'blue' : 'transparent',
+                                                borderBottomColor: localStorage.getItem('page') === page ? 'blue' : 'transparent',
                                             },
                                             '&:hover': {
                                                 '&::before': {
-                                                    borderBottomColor: activeButton === page ? 'blue' : 'transparent',
+                                                    borderBottomColor: localStorage.getItem('page') === page ? 'blue' : 'transparent',
                                                 },
                                             },
                                         }}
-                                        onClick={() => setActiveButton(page)}
-                                    >
+                                        onClick={() => localStorage.setItem('page', page)}>
                                         {index === 0 ? (
                                             <Badge badgeContent={3} color="error" >
                                                 {page}
@@ -229,7 +228,7 @@ const Nav = () => {
                 </AppBar>
             </ThemeProvider >
 
-            {dataToSubNav && <SubNav dataToSubNav={dataToSubNav} categoryName={categoryName} />}
+            {dataToSubNav && <SubNav dataToSubNav={dataToSubNav} />}
         </>
     )
 }

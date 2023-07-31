@@ -35,20 +35,20 @@ const ListArticles = () => {
 
     const handleDoubleClick = (params) => {
         const selectedRow = rows.find(row => row.id === params.id);
+
         if (selectedRow) {
-            navigate(`/editarticle/${selectedRow.id}`)
+            navigate(`/article/${selectedRow.id}`)
         }
     }
 
     return (
         <Box
             sx={{
-                height: 500,
                 '& .super-app-theme--header': {
                     backgroundColor: 'rgb(79, 79, 79)',
                     color: 'white',
                 },
-            }}>{/**list item en mobile */}
+            }}>{/** utiliser le composent "list item" en mobile */}
             <DataGrid
                 sx={{ backgroundColor: 'white' }}
                 rows={rows}

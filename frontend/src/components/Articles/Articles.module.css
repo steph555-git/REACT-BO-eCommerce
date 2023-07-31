@@ -3,3 +3,16 @@
    background-color: white;
 
 }
+
+.headerDiv{
+   background-color: rgb(166, 199, 222);
+   color: white;
+   border: 1px solid;
+   border-color: rgb(17, 17, 156);
+
+   font-weight:500;
+   display: flex;
+   align-items: center;
+   padding: 5px;
+   margin: 20px 0 20px 0;
+}

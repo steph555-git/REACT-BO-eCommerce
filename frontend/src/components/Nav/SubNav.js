@@ -4,7 +4,7 @@ import { AppBar, Box, Toolbar, IconButton, Typography, Menu } from '@mui/materia
 import { Button, MenuItem, Container } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const SubNav = ({ dataToSubNav, categoryName }) => {
+const SubNav = ({ dataToSubNav }) => {
     const SOUSPAGES = dataToSubNav
 
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -56,7 +56,7 @@ const SubNav = ({ dataToSubNav, categoryName }) => {
                                 {SOUSPAGES.map((page) => (
                                     <MenuItem key={page.label} onClick={handleCloseNavMenu}>
                                         <Typography textAlign="center" >
-                                            <Link to={`/${categoryName}/${page.path.toLowerCase()}`}
+                                            <Link to={`/${page.path.toLowerCase()}`}
                                                 style={{
                                                     color: 'black',
                                                     textDecoration: 'none',
@@ -73,7 +73,7 @@ const SubNav = ({ dataToSubNav, categoryName }) => {
                                 <Button
                                     key={page.label}
                                     component={Link}
-                                    to={`/${categoryName}/${page.path.toLowerCase()}`}
+                                    to={`/${page.path.toLowerCase()}`}
                                     onClick={handleCloseNavMenu}
                                     sx={{ mr: 3, textAlign: 'center', color: 'white', display: 'block', fontSize: '0.8rem' }}
                                 >

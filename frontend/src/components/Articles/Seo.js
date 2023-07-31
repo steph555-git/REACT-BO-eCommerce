@@ -27,6 +27,7 @@ const Seo = () => {
                     className={styles.basic}
                     size="small"
                     label="Title in URL"
+                    value={SEO.titleInURL && SEO.titleInURL}
                     variant="outlined"
                     onChange={(event) => { dispatch(setSeo({ ...SEO, titleInURL: event.target.value })) }}
                 /><br /><br />
@@ -36,6 +37,7 @@ const Seo = () => {
                     className={styles.basic}
                     size="small"
                     label="Meta Title"
+                    value={SEO.metaTitle && SEO.metaTitle}
                     variant="outlined"
                     onChange={(event) => { dispatch(setSeo({ ...SEO, metaTitle: event.target.value })) }} />
 
@@ -44,6 +46,7 @@ const Seo = () => {
                     className={styles.basic}
                     size="small"
                     label="Meta Description"
+                    value={SEO.metaDescription && SEO.metaDescription}
                     variant="outlined"
                     multiline
                     rows={4}

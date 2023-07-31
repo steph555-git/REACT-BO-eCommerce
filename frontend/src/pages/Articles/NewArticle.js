@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { Tabs, Tab, Button, ListItemIcon, ListItemText } from '@mui/material';
+import { Tabs, Tab, Button } from '@mui/material';
 import { Box, Typography } from '@mui/material';
 
 import InfoIcon from '@mui/icons-material/Info';
@@ -11,6 +11,10 @@ import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import Informations from '../../components/Articles/Informations'
 import Category from '../../components/Articles/Category'
 import Seo from '../../components/Articles/Seo'
+import Header from '../../components/Articles/Header';
+
+import { getNewArticle } from '../../redux/slices/article.slice'
+import { useSelector } from 'react-redux'
 
 import styles from './NewArticle.module.css'
 
@@ -47,34 +51,28 @@ const a11yProps = (index) => {
 }
 const NewArticle = () => {
 
+    const dataNewArticle = useSelector(getNewArticle)
+
     const [value, setValue] = useState(0);
     const [labelsSideMenu, SetLabelsSideMenu] = useState(['Informations', 'Categories', 'Seo'])
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
     const tabStyle = { color: 'white', backgroundColor: 'rgb(166, 199, 222)', fontWeight: 400 }
     const selectedTabStyle = { color: 'black', backgroundColor: 'white', fontWeight: 500 }
 
+    const handleApply = () => {
+        console.log(dataNewArticle)
+    }
     return (
         <>
-            <div className={styles.headerDiv}>
-                <div>
-                    New article
-                </div>
-                <div style={{ marginLeft: 'auto' }}>
-                    <Button variant="outlined" size="small" color="success" sx={{ backgroundColor: 'white', mx: '3px' }}>Apply</Button>
-                    <Button variant="outlined" size="small" color="success" sx={{ backgroundColor: 'white', mx: '3px' }}>Save</Button>
-                    <Button variant="outlined" size="small" color="error" sx={{ backgroundColor: 'white', mx: '3px' }}>Cancel</Button>
-                </div>
-            </div>
+            <Header title='New Article' handleApply={handleApply} />
+            
             <Box
                 sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex' }}
             >
                 <Tabs
                     orientation="vertical"
                     value={value}
-                    onChange={handleChange}
+                    onChange={(e, newValue) => { setValue(newValue) }}
                     aria-label="Vertical tabs"
                     sx={{ borderRight: 1, borderColor: 'divider', width: '200px' }}
                 >

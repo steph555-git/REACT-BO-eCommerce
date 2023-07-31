@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react'
+import { Route } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { Box, Typography, TextField } from '@mui/material'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -27,11 +28,6 @@ const Informations = () => {
         dispatch(setInformations({ ...INFORMATIONS, dateCrea: dateDuJour, visible: false }));
     }, [])
 
-    const handleChangeVisibility = (event) => {
-        const isVisible = event.target.value === "Yes";
-        dispatch(setInformations({ ...INFORMATIONS, visible: isVisible }))
-    }
-
     return (
         <Box >
             <Box sx={{ backgroundColor: '#666967', color: 'white' }}>
@@ -45,9 +41,9 @@ const Informations = () => {
                         <DemoContainer components={['DateTimePicker']} sx={{ width: '20%' }} >
                             <DemoItem label="Date" >
                                 <DatePicker
-                                    defaultValue={dayjs(dateDuJour)}
+                                    value={dayjs(INFORMATIONS.dateCrea)}
                                     className={styles.basic}
-                                    onChange={(date) => { dispatch(setInformations({ ...INFORMATIONS, dateCrea: date.format('DD/MM/YYYY') })) }}
+                                    onChange={(date) => { dispatch(setInformations({ ...INFORMATIONS, dateCrea: dayjs(date).format('DD/MM/YYYY') })) }}
                                 />
                             </DemoItem>
                         </DemoContainer>
@@ -58,11 +54,11 @@ const Informations = () => {
                             row
                             aria-labelledby="demo-row-radio-buttons-group-label"
                             name="row-radio-buttons-group"
-                            defaultValue="No"
-                            onChange={handleChangeVisibility}
+                            value={INFORMATIONS.visible}
+                            onChange={(event) => { dispatch(setInformations({ ...INFORMATIONS, visible: event.target.value })) }}
                         >
-                            <FormControlLabel value='Yes' control={<Radio color="success" size="small" />} label={<span style={{ fontSize: '0.875rem' }}>Yes</span>} />
-                            <FormControlLabel value='No' control={<Radio color="error" size="small" />} label={<span style={{ fontSize: '0.875rem' }}>No</span>} />
+                            <FormControlLabel value={true} control={<Radio color="success" size="small" />} label={<span style={{ fontSize: '0.875rem' }}>Yes</span>} />
+                            <FormControlLabel value={false} control={<Radio color="error" size="small" />} label={<span style={{ fontSize: '0.875rem' }}>No</span>} />
                         </RadioGroup>
                     </Box>
                 </Box><br></br>
@@ -72,6 +68,7 @@ const Informations = () => {
                     className={styles.basic}
                     size="small"
                     label="Title"
+                    value={INFORMATIONS.title && INFORMATIONS.title}
                     variant="outlined"
                     onChange={(event) => { dispatch(setInformations({ ...INFORMATIONS, title: event.target.value })) }}
                 />
@@ -80,6 +77,7 @@ const Informations = () => {
                     className={styles.basic}
                     size="small"
                     label="Author"
+                    value={INFORMATIONS.author && INFORMATIONS.author}
                     variant="outlined"
                     onChange={(event) => { dispatch(setInformations({ ...INFORMATIONS, author: event.target.value })) }}
                 />
@@ -90,7 +88,7 @@ const Informations = () => {
                     onInit={(evt, editor) => {
                         editorRef1.current = editor;
                     }}
-                    initialValue=""
+                    value={INFORMATIONS.chapeau && INFORMATIONS.chapeau}
                     init={{
                         height: 200,
                         menubar: false,
@@ -113,7 +111,7 @@ const Informations = () => {
                     onInit={(evt, editor) => {
                         editorRef2.current = editor;
                     }}
-                    initialValue=""
+                    value={INFORMATIONS.description && INFORMATIONS.description}
                     init={{
                         height: 500,
                         menubar: false,
