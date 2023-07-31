@@ -61,7 +61,7 @@ const ListLead = () => {
         const selectedRow = rows.find(row => row.id === params.id);
 
         if (selectedRow) {
-            navigate(`/home/lead/${selectedRow.id}`)
+            navigate(`/lead/${selectedRow.id}`)
         }
     }
     const nbLeads = rows?.length || '0'
