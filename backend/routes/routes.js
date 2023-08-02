@@ -12,10 +12,12 @@ const postNewLeadCTRL = require('../controllers/postNewLead.ctrl')
 const updateLeadCTRL = require('../controllers/updateLead.ctrl')
 const deleteLeadCTRL = require('../controllers/deleteLead.ctrl')
 
-router.route('/getallarticles')
+const getAllCategoriesCTRL = require('../controllers/getAllCategories.ctrl')
+
+router.route('/article')
     .get(getAllArticlesCTRL)
 
-router.route('/getarticle')
+router.route('/article/:id')
     .get(getArticleCTRL)
 
 router.route('/subnav')
@@ -28,5 +30,8 @@ router.route('/lead/:id')
     .get(getLeadCTRL)
     .put(updateLeadCTRL)
     .delete(deleteLeadCTRL)
+
+router.route('/cat')
+    .get(getAllCategoriesCTRL)
 
 module.exports = router

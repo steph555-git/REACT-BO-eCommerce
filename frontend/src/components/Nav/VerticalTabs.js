@@ -97,6 +97,12 @@ const VerticalTabs = ({ mode }) => {
             <TabPanel value={value} index={2} style={{ width: '100%' }}>
                 <Seo />
             </TabPanel>
+            <TabPanel value={value} index={3} style={{ width: '100%' }}>
+                <Images />
+            </TabPanel>
+            <TabPanel value={value} index={4} style={{ width: '100%' }}>
+                <Stats />
+            </TabPanel>
         </Box >
     )
 }

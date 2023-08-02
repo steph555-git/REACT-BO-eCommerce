@@ -1,116 +1,79 @@
 import React, { useState, useEffect } from 'react'
 import { Tree } from 'antd'
 
+import { getFetchBackendDataBase } from '../../utils/fetchBackendDataBase'
+import { buildTree } from '../../utils/buildTree'
 
-const treeData = [
-    {
-      title: '0-0',
-      key: '0-0',
-      children: [
-        {
-          title: '0-0-0',
-          key: '0-0-0',
-          children: [
-            {
-              title: '0-0-0-0',
-              key: '0-0-0-0',
-            },
-            {
-              title: '0-0-0-1',
-              key: '0-0-0-1',
-            },
-            {
-              title: '0-0-0-2',
-              key: '0-0-0-2',
-            },
-          ],
-        },
-        {
-          title: '0-0-1',
-          key: '0-0-1',
-          children: [
-            {
-              title: '0-0-1-0',
-              key: '0-0-1-0',
-            },
-            {
-              title: '0-0-1-1',
-              key: '0-0-1-1',
-            },
-            {
-              title: '0-0-1-2',
-              key: '0-0-1-2',
-            },
-          ],
-        },
-        {
-          title: '0-0-2',
-          key: '0-0-2',
-        },
-      ],
-    },
-    {
-      title: '0-1',
-      key: '0-1',
-      children: [
-        {
-          title: '0-1-0-0',
-          key: '0-1-0-0',
-        },
-        {
-          title: '0-1-0-1',
-          key: '0-1-0-1',
-        },
-        {
-          title: '0-1-0-2',
-          key: '0-1-0-2',
-        },
-      ],
-    },
-    {
-      title: '0-2',
-      key: '0-2',
-    },
-  ];
 
-const TreeViewCompo = () => {
+const TreeViewCompo = ({ onCheck, checkedKeys }) => {
 
-    const [expandedKeys, setExpandedKeys] = useState(['0-0-0', '0-0-1','0-1']);
-    const [checkedKeys, setCheckedKeys] = useState([]);
-    const [selectedKeys, setSelectedKeys] = useState([]);
-    const [autoExpandParent, setAutoExpandParent] = useState(true);
+  const [expandedKeys, setExpandedKeys] = useState([]);
+  const [selectedKeys, setSelectedKeys] = useState([]);
+  const [autoExpandParent, setAutoExpandParent] = useState(true);
+  const [defaultExpandAll, setDefaultExpandAll] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
+  const [dataFetched, setDataFetched] = useState([])
 
-    const onExpand = (expandedKeysValue) => {
-        console.log('onExpand', expandedKeysValue);
-        // if not set autoExpandParent to false, if children expanded, parent can not collapse.
-        // or, you can remove all expanded children keys.
-        setExpandedKeys(expandedKeysValue);
-        setAutoExpandParent(false);
+  const onExpand = (expandedKeysValue) => {
+    console.log('onExpand', expandedKeysValue);
+    setExpandedKeys(expandedKeysValue);
+    setAutoExpandParent(false);
+  };
+
+  const onSelect = (selectedKeysValue, info) => {
+    console.log('onSelect', info);
+    setSelectedKeys(selectedKeysValue);
+  };
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setIsLoading(true)
+        const jsonData = await getFetchBackendDataBase('cat')
+        const treeData = buildTree(jsonData)
+        setDataFetched(treeData)
+
+        const allKeys = [];
+        const traverseTree = (data) => {
+          data.forEach((item) => {
+            allKeys.push(item.key);
+            if (item.children) {
+              traverseTree(item.children);
+            }
+          });
+        };
+        traverseTree(treeData);
+        setExpandedKeys(allKeys);
+
+
+
+
+
+        setIsLoading(false)
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données :', error);
+        setIsLoading(false)
+      }
     };
+    fetchCategories();
+  }, [])
 
-    const onCheck = (checkedKeysValue) => {
-        console.log('onCheck', checkedKeysValue);
-        setCheckedKeys(checkedKeysValue);
-    };
-    const onSelect = (selectedKeysValue, info) => {
-        console.log('onSelect', info);
-        setSelectedKeys(selectedKeysValue);
-    };
-    return (
-        <>
-            <Tree
-                checkable
-                onExpand={onExpand}
-                expandedKeys={expandedKeys}
-                autoExpandParent={autoExpandParent}
-                onCheck={onCheck}
-                checkedKeys={checkedKeys}
-                onSelect={onSelect}
-                selectedKeys={selectedKeys}
-                treeData={treeData}
-            />
-        </>
-    )
+  return (
+    <>
+      <Tree
+        checkable
+        onExpand={onExpand}
+        expandedKeys={expandedKeys}
+        defaultExpandAll={defaultExpandAll}
+        autoExpandParent={autoExpandParent}
+        onCheck={onCheck}
+        checkedKeys={checkedKeys}
+        onSelect={onSelect}
+        selectedKeys={selectedKeys}
+        treeData={dataFetched}
+      />
+    </>
+  )
 }
 
 export default TreeViewCompo
